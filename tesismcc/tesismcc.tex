@@ -1,0 +1,73 @@
+\documentclass[oneside]{book}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{cite,url,graphicx,epsfig,amsmath,amssymb,enumitem,amsthm,appendix,authblk}
+\usepackage[hidelinks,bookmarks=true]{hyperref}
+\usepackage[paperwidth=17cm,paperheight=22.5cm,margin=2cm]{geometry} %dimensiones oficiales 
+
+%\setlength{\parskip}{6pt} %espacio entre párrafos
+
+%\usepackage[letter,center,noinfo]{crop} %para revision ("frame" para cuadrito)
+%\usepackage{fullpage} %otra pra revision
+\newcommand{\thesisTitle}{Flujos de trabajo intensivos en datos para cómputo en la nube}
+
+\usepackage{color} %colores para el codigo
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82} 
+
+\usepackage{listings}
+\usepackage{courier} %para poner codigo en monospace
+%\usepackage{iconsolata}
+\lstset{ %
+  framextopmargin=50pt,
+  backgroundcolor=\color{white},      % choose the background color
+  basicstyle=\footnotesize\ttfamily,  % size of fonts used for the code
+  breaklines=true,                    % automatic line breaking only at whitespace
+  captionpos=b,                       % sets the caption-position to bottom
+  commentstyle=\color{mygreen},       % comment style
+  escapeinside={\%*}{*)},             % if you want to add LaTeX within your code
+  keywordstyle=\color{blue},          % keyword style
+  stringstyle=\color{mymauve},        % string literal style
+  numbers=left,                       % numbering position
+  escapeinside={(*@}{@*)}             % labels inside code
+}
+\renewcommand{\lstlistingname}{Código}
+\renewcommand{\lstlistlistingname}{Lista de \lstlistingname s}
+
+
+\usepackage{algorithm} % Pseudocódigo de algoritmos (Gracias Andreu)
+\usepackage{algpseudocode}
+\renewcommand{\algorithmicrequire}{\textbf{Entrada:}}
+\renewcommand{\algorithmicensure}{\textbf{Salida:}}
+
+\newtheorem{defn}{Definición} %definición de definicones matemágicas
+
+\begin{document}
+%\include{portada} %Portada ITAM 
+
+%\frontmatter
+%\include{statement} %Declaracion de derechos
+%\include{abstracts}
+%\include{ack}
+%\tableofcontents
+%\listoffigures
+%\lstlistoflistings
+
+%\mainmatter
+\include{chap01-intro}
+%\include{chap02-workflows}
+%\include{chap03-distributed_computing}
+%\include{chap04-scheduling}
+%\include{chap05-scheduling_algorithms}
+%\include{chap06-workflow_mgmt_software}
+%\include{chap07-implementation}
+%\include{chap08-results}
+%\include{chap09-conclusions}
+
+%\appendix
+%\include{app}
+
+%\bibliographystyle{plain}
+%\bibliography{referencias}
+\end{document}
