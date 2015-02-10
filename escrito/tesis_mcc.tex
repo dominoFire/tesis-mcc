@@ -3,7 +3,7 @@
 \usepackage[spanish]{babel}
 \usepackage{cite,url,graphicx,epsfig,amsmath,amssymb,enumitem,amsthm,appendix,authblk}
 \usepackage[hidelinks,bookmarks=true]{hyperref}
-\usepackage[paperwidth=17cm,paperheight=22.5cm,margin=2cm]{geometry} %dimensiones oficiales 
+\usepackage[paperwidth=17cm,paperheight=22.5cm,margin=2cm]{geometry} %dimensiones oficiales
 
 %\setlength{\parskip}{6pt} %espacio entre párrafos
 
@@ -14,7 +14,7 @@
 \usepackage{color} %colores para el codigo
 \definecolor{mygreen}{rgb}{0,0.6,0}
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
-\definecolor{mymauve}{rgb}{0.58,0,0.82} 
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
 
 \usepackage{listings}
 \usepackage{courier} %para poner codigo en monospace
@@ -44,9 +44,9 @@
 \newtheorem{defn}{Definición} %definición de definicones matemágicas
 
 \begin{document}
-%\include{portada} %Portada ITAM 
+\include{portada} %Portada ITAM
 
-%\frontmatter
+\frontmatter
 %\include{statement} %Declaracion de derechos
 %\include{abstracts}
 %\include{ack}
@@ -54,20 +54,14 @@
 %\listoffigures
 %\lstlistoflistings
 
-%\mainmatter
+\mainmatter
 \include{chap01-intro}
-%\include{chap02-workflows}
-%\include{chap03-distributed_computing}
-%\include{chap04-scheduling}
-%\include{chap05-scheduling_algorithms}
-%\include{chap06-workflow_mgmt_software}
-%\include{chap07-implementation}
-%\include{chap08-results}
-%\include{chap09-conclusions}
+\include{chap02-design}
+\include{chap03-algorithm}
 
-%\appendix
+\appendix
 %\include{app}
 
-%\bibliographystyle{plain}
-%\bibliography{referencias}
+\bibliographystyle{plain}
+\bibliography{referencias}
 \end{document}
