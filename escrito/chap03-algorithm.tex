@@ -1,10 +1,13 @@
-\chapter{Algoritmo de planificación de flujos de trabajo sobre cómputo en la nube}
+\chapter{Flujos de trabajo sobre cómputo en la nube}
 
 En este capítulo, describiremos el algoritmo que es la pieza clave del sistema para agendar tareas de un flujo de trabajo en infraestructura de cómputo en la nube, tomando en cuenta los lineamientos de diseño propuestos anteriormente.
 
+
+
+\section{Antecedentes}
+
 También, un área de investigación activa es la planificación de tareas a nivel de procesador (CPU's), en donde se asume que se tiene un procesador cuyos núcleos son idénticos e intercambiables. Además, en los trabajos de investigación referentes a esta área se consideran a los grafos dirigidos acíclicos como los modelos de tareas más generales. Así, basados en el trabajo de Saifullah et al. \cite{saifullah2013multi}, en donde primero se transforma un grafo dirigido acíclico en un conjunto de tareas secuenciales con secciones que se ejecutan en paralelo.
 
-Primero, es muy común que los servicios de cómputo en la nube se paguen la utilización de las máquinas virtuales por hora, dejando sin cobrar porciones de hora no utlizadas. Además, cada recurso es n
 
 % Podemos hacer esto aún más abstracto y combinarlo con la teoría de Pinedo
 
@@ -20,15 +23,16 @@ Primero, es muy común que los servicios de cómputo en la nube se paguen la uti
 
 % ya sabemos que es NP-hard, asi que nos enfocaremos en el problema
 
+
+
 % Primero, tienes recursos 'infinitos', solo sujetos a presupuesto
 % puedes averiguar el numero maximo de maquinas a levantar con el modelo de tareas paralelar
 % simplemente cuentas el segmento con el mayor numero de paralelizaciones
 
+Es muy común que los servicios de cómputo en la nube se paguen la utilización de las máquinas virtuales por hora, dejando sin cobrar porciones de hora no utlizadas. Además, se pueden solicitar tantos recursos como se requieran, limitándose solamente al presupuesto disponible. Además, estas máquinas virtuales son recursos variados; pueden ser desde máquinas con un solo procesador, hasta VM's con grandes cantidades de memoria.
 
-% De acuerdo al primer capitulo del Pinedo, si hay esfuerzos para clasificar
-% los problemas
+De acuerdo al primer capitulo del libro de Pinedo \cite{pinedo2012scheduling} hay esfuerzos para clasificar los problemas de planificación en general. Sin embargo, la clasificación presentada en este trabajo sólo contempla los problemas que optimizan una sola métrica. Aunque, se puede utilizar una combinación lineal de funciones objetivo a optimizar y de esta forma se pueden utilizar estos algoritmos de planificación. Sin embargo, esta forma de atacar el problema de planificación multiobjetivo no garantiza evaluar todas las posibles opciones. 
 
 % Hacer puente entre las teorías de Buyya y Jia Yu y las teorías de Pinedo
-
 
 % Hay que leer los papers de arquitectura
