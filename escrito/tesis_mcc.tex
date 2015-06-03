@@ -1,8 +1,9 @@
 \documentclass[oneside]{book}
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
-\usepackage{cite,url,graphicx,epsfig,amsmath,amssymb,enumitem,amsthm,appendix,authblk}
+\usepackage{cite,url,graphicx,epsfig,amsmath,amssymb,amsthm,appendix,authblk}
 \usepackage[hidelinks,bookmarks=true]{hyperref}
+\usepackage[inline]{enumitem}
 \usepackage[paperwidth=17cm,paperheight=22.5cm,margin=2cm]{geometry} %dimensiones oficiales
 
 %\setlength{\parskip}{6pt} %espacio entre párrafos
@@ -54,9 +55,11 @@
 %\lstlistoflistings
 
 \mainmatter
-\include{chap01-intro}
-\include{chap02-design}
-\include{chap03-algorithm}
+\include{chap-intro}
+\include{chap-design}
+\include{chap-scheduling-theory}
+\include{chap-algorithm}
+\include{chap-sweeper}
 
 \appendix
 %\include{app}
