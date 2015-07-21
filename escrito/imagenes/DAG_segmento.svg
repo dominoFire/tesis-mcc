@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+    "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
+<svg contentScriptType="text/ecmascript" width="2518px"
+     xmlns:xlink="http://www.w3.org/1999/xlink" zoomAndPan="magnify"
+     contentStyleType="text/css" viewBox="-1141 -335 1141 381" height="841px"
+     preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg"
+     version="1.1">
+    <g id="edges">
+        <path fill="none" stroke-width="7"
+              d="M -1111.248047,-100.078484 L -951.194946,-10.481110"
+              class="8 10" stroke-opacity="1.0" stroke="#999999"/>
+        <path fill="none" stroke-width="7"
+              d="M -1111.248047,-100.078484 L -954.094238,-198.838196"
+              class="8 15" stroke-opacity="1.0" stroke="#999999"/>
+        <path fill="none" stroke-width="7"
+              d="M -903.203003,16.384689 L -508.799103,-27.924751" class="10 14"
+              stroke-opacity="1.0" stroke="#999999"/>
+        <path fill="none" stroke-width="7"
+              d="M -716.871338,-146.045761 L -504.738861,-55.630211"
+              class="12 14" stroke-opacity="1.0" stroke="#999999"/>
+        <path fill="none" stroke-width="7"
+              d="M -907.526184,-228.102814 L -767.390869,-167.789169"
+              class="15 12" stroke-opacity="1.0" stroke="#999999"/>
+        <path fill="none" stroke-width="7"
+              d="M -907.526184,-228.102814 L -764.831055,-284.981018"
+              class="15 16" stroke-opacity="1.0" stroke="#999999"/>
+        <path fill="none" stroke-width="7"
+              d="M -713.740173,-305.345795 L -505.179321,-269.985962"
+              class="16 13" stroke-opacity="1.0" stroke="#999999"/>
+    </g>
+    <g id="arrows">
+        <polyline fill="#999999" fill-opacity="1.0" class="8 10"
+                  points="-932.870789,-0.223259 -956.323853,-1.319008 -946.066040,-19.643211"
+                  stroke="none"/>
+        <polyline fill="#999999" fill-opacity="1.0" class="8 15"
+                  points="-936.313721,-210.011963 -948.507385,-189.947937 -959.681091,-207.728455"
+                  stroke="none"/>
+        <polyline fill="#999999" fill-opacity="1.0" class="10 14"
+                  points="-487.930389,-30.269255 -507.626862,-17.490395 -509.971344,-38.359108"
+                  stroke="none"/>
+        <polyline fill="#999999" fill-opacity="1.0" class="12 14"
+                  points="-485.420410,-47.396267 -508.855835,-45.970993 -500.621887,-65.289429"
+                  stroke="none"/>
+        <polyline fill="#999999" fill-opacity="1.0" class="15 12"
+                  points="-748.101624,-159.487137 -771.541870,-158.144531 -763.239868,-177.433807"
+                  stroke="none"/>
+        <polyline fill="#999999" fill-opacity="1.0" class="15 16"
+                  points="-745.323608,-292.756653 -760.943237,-275.227295 -768.718872,-294.734741"
+                  stroke="none"/>
+        <polyline fill="#999999" fill-opacity="1.0" class="16 13"
+                  points="-484.474792,-266.475677 -506.934479,-259.633698 -503.424164,-280.338226"
+                  stroke="none"/>
+    </g>
+    <g id="nodes">
+        <circle fill-opacity="1.0" fill="#999999" r="30.0" cx="-1111.248"
+                class="8" cy="-100.07848" stroke="#000000" stroke-opacity="1.0"
+                stroke-width="4.0"/>
+        <circle fill-opacity="1.0" fill="#999999" r="30.0" cx="-903.203"
+                class="10" cy="16.38469" stroke="#000000" stroke-opacity="1.0"
+                stroke-width="4.0"/>
+        <circle fill-opacity="1.0" fill="#999999" r="30.0" cx="-716.87134"
+                class="12" cy="-146.04576" stroke="#000000" stroke-opacity="1.0"
+                stroke-width="4.0"/>
+        <circle fill-opacity="1.0" fill="#999999" r="30.0" cx="-450.95316"
+                class="13" cy="-260.79236" stroke="#000000" stroke-opacity="1.0"
+                stroke-width="4.0"/>
+        <circle fill-opacity="1.0" fill="#999999" r="30.0" cx="-454.14294"
+                class="14" cy="-34.065117" stroke="#000000" stroke-opacity="1.0"
+                stroke-width="4.0"/>
+        <circle fill-opacity="1.0" fill="#999999" r="30.0" cx="-907.5262"
+                class="15" cy="-228.10281" stroke="#000000" stroke-opacity="1.0"
+                stroke-width="4.0"/>
+        <circle fill-opacity="1.0" fill="#999999" r="30.0" cx="-713.7402"
+                class="16" cy="-305.3458" stroke="#000000" stroke-opacity="1.0"
+                stroke-width="4.0"/>
+    </g>
+    <g id="node-labels">
+        <text font-size="24" x="-1111.248" y="-95.70348" fill="#000000"
+              style="text-anchor: middle; dominant-baseline: central;"
+              font-family="Dialog" class="8">
+            t1
+        </text>
+        <text font-size="24" x="-903.203" y="20.837814" fill="#000000"
+              style="text-anchor: middle; dominant-baseline: central;"
+              font-family="Dialog" class="10">
+            t2
+        </text>
+        <text font-size="24" x="-716.87134" y="-141.5067" fill="#000000"
+              style="text-anchor: middle; dominant-baseline: central;"
+              font-family="Dialog" class="12">
+            t3
+        </text>
+        <text font-size="24" x="-450.95316" y="-256.41736" fill="#000000"
+              style="text-anchor: middle; dominant-baseline: central;"
+              font-family="Dialog" class="13">
+            t4
+        </text>
+        <text font-size="24" x="-454.14294" y="-29.60418" fill="#000000"
+              style="text-anchor: middle; dominant-baseline: central;"
+              font-family="Dialog" class="14">
+            t5
+        </text>
+        <text font-size="24" x="-907.5262" y="-223.56375" fill="#000000"
+              style="text-anchor: middle; dominant-baseline: central;"
+              font-family="Dialog" class="15">
+            t6
+        </text>
+        <text font-size="24" x="-713.7402" y="-300.9708" fill="#000000"
+              style="text-anchor: middle; dominant-baseline: central;"
+              font-family="Dialog" class="16">
+            t7
+        </text>
+    </g>
+</svg>

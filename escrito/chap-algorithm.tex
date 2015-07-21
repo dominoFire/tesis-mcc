@@ -36,3 +36,53 @@ De acuerdo al primer capitulo del libro de Pinedo \cite{pinedo2012scheduling} ha
 % Hacer puente entre las teorías de Buyya y Jia Yu y las teorías de Pinedo
 
 % Hay que leer los papers de arquitectura
+
+
+
+\section{Los cuatro algoritmos}
+
+Si bien en la literatura hay múltiples algoritmos de planificación publicados por la comunidad científica, éste es sólo una parte (muy importante) de un sistema administrador de flujos de trabajo. En el caso de este trabajo, dividmos todo el proceso en cuatro fases:
+
+\begin{enumerate}
+\item{Planificación}
+\item{Asignación de recursos}
+\item{Ejecución}
+\item{Descarga de resultados}
+\end{enumerate}
+
+
+
+\subsection{Planificación}
+
+La idea base del algoritmo es lidiar con las dependencias, ya que éstas generan restricciones sobre el problema. Otra característica a aprovechar es el hecho de que los recursos de cómputo en la nube pueden ser tratados como \emph{efímeros}, es decir, pueden ser creados y destruidos conforme se vayan necesitando.
+
+De esta forma, el primer paso del algoritmo de planificación es dividir el flujo de trabajo en segmentos consecutivos, con la propiedad de que un segmento sólo dependa de la ejecución completa del segmento anterior
+
+Para generar los segmentos, se utiliza la definición de Saifullah et. al \cite{saifullah2013multi} basada en la profundidad de cada nodo del DAG que representa el flujo de trabajo.
+
+\begin{defn}
+
+La \textbf{profundidad} $h$ de una tarea $t$ de un flujo de trabajo está definida como:
+
+\begin{displaymath}
+h(x) = \left\{
+     \begin{array}{lr}
+       \max_{u \in \text{Padres}(t) } h(u) + 1 & : | \text{Padres}(t) | \neq 0 \\
+       1                                       & : | \text{Padres}(t) | = 0
+     \end{array}
+   \right.
+\end{displaymath}
+
+\noindent Donde $\text{Padres}(t)$ es el conjunto de tareas que inmediatamente preceden a la tarea $t$, es decir, aquellas tareas $u$ que tienen una dependencia de orden que va a la tarea $t$.
+\end{defn}
+
+En la figura \ref{fig:DAG_to_segment} se puede apreciar un ejemplo de este algoritmo, en donde se puede ver que a cada tarea del flujo de trabajo se le asigna un segmento, en cual se está garantizando que cada segmento sólo dependa del segmento anterior.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=1.0\textwidth]{imagenes/DAG_to_segment.pdf}
+\end{center}
+\caption{Transformación de un flujo de trabajo (a) a segmentos (b)}
+\label{fig:DAG_to_segment}
+\end{figure}
+
