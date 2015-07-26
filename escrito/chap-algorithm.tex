@@ -86,3 +86,23 @@ En la figura \ref{fig:DAG_to_segment} se puede apreciar un ejemplo de este algor
 \label{fig:DAG_to_segment}
 \end{figure}
 
+Otro punto a notar es que hay un límite en el número de tareas concurrentes que es posible ejecutar debido a las restricciones. Esto implica que a lo sumo hay un número finito de recursos concurrentes que se necesitan para correr el flujo de trabajo. Este límite equivale al máximo de tareas de un segmento.
+
+
+\subsection{Asginación de recursos}
+
+Ahora, el cómputo en la nube abre otras posibilidades que no se pueden realizar en los entornos de cómputo distribuido tradicionales, como el hecho de poder solicitar máquinas virtuales de acuerdo a la demanda. De esta forma, con las tareas del flujo de trabajo segmentadas, se puede ver a cada segemento como un conjunto de tareas independientes. Así, se puede usar un algoritmo de programación dinámica que pueda encontrar la asignación óptima de máquinas virtuales y tareas entre cada segmento.
+
+Así, este algoritmo se puede ver como el algoritmo de la mochila \emph{inverso} con múltiples mochilas, en donde los las mochilas son las posibles configuraciones y las tareas son objetos que deben ser \emph{embolsados}. El objetivo de este algoritmo es encontrar aquella asignación que pueda embolsar todas las tareas maximizando el uso del espacio de las mochilas, sujeto a una condición de optimalidad. Para este caso, la condición de optimalidad es encontrar el costo mínimo de ejecución.
+
+Por el momento, para hacer el match entre configuraciones y tareas, se asume que cada tarea ocupa un núcleo de una máquina virtual y que todas las posibles configuraciones de máquinas virtuales del proveedor tienen memoria primaria suficiente para ejecutar las tareas.
+
+
+\subsection{Ejecución}
+
+Con las asignaciones ya resueltas, se procede a ejecutar el flujo de trabajo. (Todavía no está lista esta parte del algoritmo)
+
+
+\subsection{Descarga de resultados}
+
+Finalmente, si en las tareas hay una entrada que indique descargar los resultados, se transfieren los archivos especificados a la máquina principal que ejecuta el algoritmo.
