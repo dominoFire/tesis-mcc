@@ -41,6 +41,10 @@
 \renewcommand{\algorithmicrequire}{\textbf{Entrada:}}
 \renewcommand{\algorithmicensure}{\textbf{Salida:}}
 
+\usepackage{fixltx2e}
+\MakeRobust{\Call}
+%\renewcommand*\Call[2]{\textproc{#1}(#2)}
+
 \newtheorem{defn}{Definición} %definición de definicones matemágicas
 
 \begin{document}
@@ -56,7 +60,6 @@
 
 \mainmatter
 \include{chap-intro}
-\include{chap-design}
 \include{chap-scheduling-theory}
 \include{chap-algorithm}
 \include{chap-sweeper}
@@ -64,7 +67,6 @@
 
 \appendix
 %\include{app}
-
 \bibliographystyle{plain}
 \bibliography{referencias}
 \end{document}

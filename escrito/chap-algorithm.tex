@@ -1,4 +1,5 @@
 \chapter{Flujos de trabajo sobre cómputo en la nube}
+\label{chap:algorithm}
 
 En este capítulo, describiremos el algoritmo que es la pieza clave del sistema para agendar tareas de un flujo de trabajo en infraestructura de cómputo en la nube, tomando en cuenta los lineamientos de diseño propuestos anteriormente.
 
@@ -23,25 +24,21 @@ También, un área de investigación activa es la planificación de tareas a niv
 
 % ya sabemos que es NP-hard, asi que nos enfocaremos en el problema
 
-
-
 % Primero, tienes recursos 'infinitos', solo sujetos a presupuesto
 % puedes averiguar el numero maximo de maquinas a levantar con el modelo de tareas paralelar
 % simplemente cuentas el segmento con el mayor numero de paralelizaciones
 
 Es muy común que los servicios de cómputo en la nube se paguen la utilización de las máquinas virtuales por hora, dejando sin cobrar porciones de hora no utlizadas. Además, se pueden solicitar tantos recursos como se requieran, limitándose solamente al presupuesto disponible. Además, estas máquinas virtuales son recursos variados; pueden ser desde máquinas con un solo procesador, hasta VM's con grandes cantidades de memoria.
 
-De acuerdo al primer capitulo del libro de Pinedo \cite{pinedo2012scheduling} hay esfuerzos para clasificar los problemas de planificación en general. Sin embargo, la clasificación presentada en este trabajo sólo contempla los problemas que optimizan una sola métrica. Aunque, se puede utilizar una combinación lineal de funciones objetivo a optimizar y de esta forma se pueden utilizar estos algoritmos de planificación. Sin embargo, esta forma de atacar el problema de planificación multiobjetivo no garantiza evaluar todas las posibles opciones. 
+De acuerdo al primer capitulo del libro de Pinedo \cite{pinedo2012scheduling} hay esfuerzos para clasificar los problemas de planificación en general. Sin embargo, la clasificación presentada en este trabajo sólo contempla los problemas que optimizan una sola métrica. Aunque, se puede utilizar una combinación de funciones objetivo a optimizar y de esta forma se pueden utilizar estos algoritmos de planificación. Sin embargo, esta forma de atacar el problema de planificación multiobjetivo no garantiza evaluar todas las posibles opciones. 
 
 % Hacer puente entre las teorías de Buyya y Jia Yu y las teorías de Pinedo
 
 % Hay que leer los papers de arquitectura
 
-
-
 \section{Los cuatro algoritmos}
 
-Si bien en la literatura hay múltiples algoritmos de planificación publicados por la comunidad científica, éste es sólo una parte (muy importante) de un sistema administrador de flujos de trabajo. En el caso de este trabajo, dividmos todo el proceso en cuatro fases:
+Si bien en la literatura hay múltiples algoritmos de planificación publicados por la comunidad científica, éste es sólo una parte (muy importante) de un sistema administrador de flujos de trabajo. En el caso de este trabajo, dividimos todo el proceso en cuatro fases:
 
 \begin{enumerate}
 \item{Planificación}
@@ -86,8 +83,42 @@ En la figura \ref{fig:DAG_to_segment} se puede apreciar un ejemplo de este algor
 \label{fig:DAG_to_segment}
 \end{figure}
 
-Otro punto a notar es que hay un límite en el número de tareas concurrentes que es posible ejecutar debido a las restricciones. Esto implica que a lo sumo hay un número finito de recursos concurrentes que se necesitan para correr el flujo de trabajo. Este límite equivale al máximo de tareas de un segmento.
+Otro punto a notar es que hay un límite en el número de tareas concurrentes que es posible ejecutar debido a las restricciones. Esto implica que a lo sumo hay un número finito de recursos concurrentes que se necesitan para correr el flujo de trabajo. Este límite equivale al máximo de tareas de los segmentos que conforman el flujo de trabajo.
 
+En pseudocódigo \ref{alg_blind_segments}, se calculan los segmentos de un flujo de trabajo.
+
+\begin{algorithm}
+\caption{Segmentación de un flujo de trabajo}
+\label{alg_blind_segments}
+\begin{algorithmic}[1]
+\Require{Un flujo de trabajo $workflow$}
+\Ensure{Un mapa con los segmentos de cada tarea del flujo de trabajo}
+\Procedure{get\_task\_segments}{$workflow$}
+	\State $visited \gets$ Diccionario
+	\State $segment \gets$ Diccionario
+	\For{$t \in workflow.tasks$}
+		\State \Call{get\_segment}{$t$}
+	\EndFor
+	\State \Return $segment$
+\EndProcedure
+
+\Procedure{get\_segment}{$task$}
+	\State $visited[task] \gets True$
+	\State $max\_seg \gets 0$
+	\If{$ \lnot (task \in segment)$}
+		\State $segment[task] \gets 0$
+		\For{$p \in task.parents$}
+			\State $v \gets \Call{get\_segment}{p}$
+			\If{$v > max\_seg$}
+				\State $max\_seg = v$
+			\EndIf
+		\EndFor
+		\State $segment[task] \gets max\_seg + 1$
+	\EndIf
+	\State \Return $segment[task]$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
 
 \subsection{Asginación de recursos}
 
@@ -96,6 +127,103 @@ Ahora, el cómputo en la nube abre otras posibilidades que no se pueden realizar
 Así, este algoritmo se puede ver como el algoritmo de la mochila \emph{inverso} con múltiples mochilas, en donde los las mochilas son las posibles configuraciones y las tareas son objetos que deben ser \emph{embolsados}. El objetivo de este algoritmo es encontrar aquella asignación que pueda embolsar todas las tareas maximizando el uso del espacio de las mochilas, sujeto a una condición de optimalidad. Para este caso, la condición de optimalidad es encontrar el costo mínimo de ejecución.
 
 Por el momento, para hacer el match entre configuraciones y tareas, se asume que cada tarea ocupa un núcleo de una máquina virtual y que todas las posibles configuraciones de máquinas virtuales del proveedor tienen memoria primaria suficiente para ejecutar las tareas.
+
+El algoritmo de asignación de recursos a tareas de un segmento está descrito en el pseudocódigo \ref{alg_blind_main}. Como se puede notar en este pseudocódigo, hay dos funciones que son invocadas. La primera, llamada $\Call{take}{}$, calcula los costos óptimos de generar una asignación que utilice todos los cores de las configuraciones de la máquinas virtuales
+
+\begin{algorithm}
+\caption{Asignación de configuraciones a segmento de flujo de trabajo}
+\label{alg_blind_main}
+\begin{algorithmic}[1]
+\Require{ 
+Los siguientes parámetros:
+\begin{itemize}
+	\item Una lista de tareas de un segmento $tasks$
+	\item Una lista de configuraciones de recursos $resource\_configs$ 
+\end{itemize}
+}
+\Ensure{Una lista de asignaciones de tarea -- recurso $resource\_mappings$}
+
+\Procedure{bin\_packing}{$tasks$, $resource\_configs$}
+	\State $mem\_costs \gets$ Matriz de $|tasks| \times |resource\_configs|$, inicializado con 0 
+	\State $visited \gets$ Matriz de $|tasks| \times |resource\_configs|$, inicializado con 0
+	\State $used \gets$ Arreglo de tamaño $|resource\_configs|$, incializado con $\texttt{MAX\_INT}$
+	\State $resource\_mappings \gets$ Lista vacía
+	\State \Call{take}{0, 0}
+	\State \Call{check\_take}{0, 0}
+	\State \Return $resource\_mappings$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+
+Ahora, en los siguentes pseudocódigos, se mostrarán las funciones principales para generar la asignación de recursos:
+
+\begin{algorithm}
+\caption{Costos de ejecución de un segmento de un flujo de trabjo}
+\begin{algorithmic}[1]
+\Require{ Los siguientes parámetros:
+	\begin{itemize}
+		\item Una lista de tareas de un segmento $tasks$
+		\item Una lista de configuraciones de recursos $resource\_configs$
+	\end{itemize}
+}
+\Ensure{Una lista de asignaciones de tarea--recurso $resource\_mappings$}
+\Procedure{take}{$t_i$, $rc_i$}
+	\If{$rc_i = |resource\_configs|$}
+		\State{\Return{\Call{all\_scheduled}{}}}
+	\EndIf
+	\If{$visited[t_i, rc_i] \neq 0$}
+		\State \Return $mem\_costs[t_i, rc_i]$
+	\EndIf
+
+	\For{$y \in [rc_i, \dots, |resource\_configs|]$}
+		\State $rc \gets resource\_configs[y]$
+		\State $t_{lim} \gets \min(|tasks|, t_i + rc.cores)$ \Comment{Permitimos subutilización}
+		\For{$tt \in tasks[t_i, \dots, t_{lim}]$} \Comment{Costo del core más usado}
+			\State $taked\_cost \gets \max(taked\_cost, \frac{tt.complexity\_factor}{rc.speed\_factor} rc.cost\_hour\_usd)$
+		\EndFor
+		\State $used[y] \gets used[y] + 1$
+		\State $taked\_yes \gets \Call{take}{t_{lim}, 0}$
+		\State $used[y] \gets used[y] - 1$
+		\State $taked\_not \gets \Call{take}{t_i, y + 1}$
+		\If{$taked\_yes < taked\_not$}
+			\State $mem\_costs[t_i, y] \gets taked\_yes$
+			\State $visited[t_i, y] \gets 1$
+		\Else
+			\State $mem\_costs[t_i, y] \gets taked\_not$
+			\State $visited[t_i, y] \gets -1$
+		\EndIf
+	\EndFor
+	\State \Return $mem\_costs[t_i, rc_i]$
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+La función anterior calcula el costo de la asignación óptima. La siguiente función construye a partir de la tabla de resultados generada por el procedimiento anterior.
+
+\begin{algorithm}
+\caption{Asignación óptima de un segmento de un flujo de trabajo}
+\begin{algorithmic}[1]
+\Require{Tabla de resultados generada por \Call{take}{}}
+\Ensure{Dunno}
+\Procedure{check\_take}{$t_i$, $rc_i$}
+	\If{$t_i < |tasks| \land rc_i < |resource\_configs|$}
+		\If{ $visited[t_i, rc_i] = 1$ }
+			\State $rc \gets resource\_configs[rc_i]$
+			\State $t_{lim} \gets \min(|tasks|, t_i + rc.cores)$
+			\State Añadir $(tasks[t_i \dots t_{lim}], resource\_configs[rc_i])$ a $resource\_mappings$
+			\State \Call{check\_take}{$t_{lim}$, $0$}
+		\ElsIf{$visited[t_i, rc_i] = -1$}
+			\State \Call{check\_take}{$t_i$, $rc_i + 1$}	
+		\EndIf
+	\EndIf
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+Ahora bien, si el tiempo requerido para invocar máquinas virtuales fuera cero y las transferencias de datos fueran instantáneas, estos serían los únicos algoritmos que necesitariamos ejecutar para correr flujos de trabajo. Sin embargo, como las acciones anteriores no se ejecutan instantáneamente, hay que tomar en cuenta estos costos a la hora de planificar.
+
+
 
 
 \subsection{Ejecución}

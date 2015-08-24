@@ -2,7 +2,7 @@
 
 El mundo digital dominado por datos requiere la utilización de algoritmos, tecnologías y mecanismos que permitan orquestar procesamientos de grandes volúmenes de datos, los cuales pueden tardar horas e, incluso, días en completarse. Aún así, el diseño de la aplicación junto con el flujo de trabajo que modela las tereas llevadas a cabo por la aplicación, requiere un esfuerzo considerable.
 
-Ahora bien, sería deseable desarrollar una plataforma que permita distribuir estos flujos de trabajo computacionalmente intensivos en un sistema distribuído con el fin de disminuir el tiempo de ejecución del flujo. También, es deseable disminuir el presupuesto utilizado, ya que en la actualidad, es muy común utilizar servicios de cómputo, en el cual se paga por este servicio de acuerdo a un modelo económico en el que se paga sólo por el servicio utilizado.
+Ahora bien, sería deseable desarrollar una plataforma que permita distribuir estos flujos de trabajo computacionalmente intensivos en un sistema distribuído con el fin de disminuir el tiempo de ejecución del flujo. También, es deseable disminuir el presupuesto utilizado, ya que en la actualidad, es muy común utilizar servicios de cómputo en la nube, en el cual se paga por este servicio de acuerdo a un modelo económico en el que se paga sólo por el servicio utilizado.
 
 En este trabajo se muestra el desarrollo de esta plataforma de ejecución de flujos de trabajo intensivo en datos con aplicación en cómputo en la nube. También se muestra el marco teórico necesario para el desarrollo de este proyecto.
 
@@ -13,12 +13,12 @@ Primero, empezaremos por describir el modelo de costos de cómputo en la nube, m
 
 \section{Descripción del problema}
 
-Se tiene un flujo de trabajo definido por $W = (T, D)$, donde $T$ es el conjunto de tareas del flujo de trabajo y $D$ es el conjunto de dependencias que existen entre las tareas del flujo de trabajo. Se desea planificar las tareas en un conjunto de recursos $R$ en la nube de diferente capacidad, los cuales están conectados entre sí por medio de una red privada virtual. Se tiene una función $F: W \times R \mapsto (\mathcal{R}^{+} \times {R}^{+}) $ la cual asocia un costo y un tiempo total de ejecución a una planificación de este flujo de trabajo con el conjunto de recursos dato. Se requiere minimizar la función $F$ tanto en costo como en tiempo. Cabe aclarar que, a diferencia del problema clásico de planificación de flujos de trabajo donde se tiene
+Se tiene un flujo de trabajo definido por $W = (T, D)$, donde $T$ es el conjunto de tareas del flujo de trabajo y $D$ es el conjunto de dependencias que existen entre las tareas del flujo de trabajo. Se desea planificar las tareas en un conjunto de recursos $R$ en la nube de diferente capacidad, los cuales están conectados entre sí por medio de una red. Se tiene una función $F: W \times R \mapsto (\mathcal{R}^{+} \times {R}^{+}) $ la cual asocia un costo y un tiempo total de ejecución a una planificación de este flujo de trabajo con el conjunto de recursos dado. Se requiere minimizar la función $F$ tanto en costo como en tiempo. Cabe aclarar que, a diferencia del problema clásico de planificación de flujos de trabajo donde se tiene un conjunto \emph{fijo} de recursos, en entornos de computo en la nube, se pueden solicitar los recursos necesarios para ejecutar el flujo de trabajo.
 
 
 \section{Lineamientos de diseño}
 
-Desarrollar un sistema de administración de flujos de trabajo es como desarrollar una receta para hacer chocolate: hay muchas formas y modalidades de hacerlo. Sin embargo, se pueden ver algunos patrones de uso o generalidades que quisiéramos observar en el sistema administrador de flujos de trabajo. A continuación, se listarán los lineamentos de diseño deseables en el sistema administrador de flujos de trabajo.
+Desarrollar un sistema de administración de flujos de trabajo conlleva varias decisiones de diseño, por lo que . Sin embargo, se pueden ver algunos patrones de uso o generalidades que quisiéramos observar en el sistema administrador de flujos de trabajo. A continuación, se listarán los lineamentos de diseño deseables en el sistema administrador de flujos de trabajo.
 
 
 
@@ -30,25 +30,35 @@ Los sistemas de cómputo distribuido tienen inherentes una complexidad que crece
 
 \subsection{Orientado a nubes}
 
-Aunque se pueden ejecutar Open Grid Scheduler, HTCondor, programas MPI y aplicaciones basadas en MapReduce y cómputo distribuido en gráficas, éstos funcionan muy bien en entornos de una sola computadora con gran capacidad o en grids institucionales. Sin embargo, cuando se utilizan estos programas en enfoques como la nube, surgen algunas eventualidades, a saber: 1) es más difícil supervisar estos entornos por el hecho de la insfraestrucutra no es \emph{on-premise} o, en el caso de grids comunitarios, se conoce a ciencia cierta el funcionamiento del sistema y, 2) hay un costo monetario por utilizar estos recursos que está explícitamente establecido, el cual es deseable minimizar. Además, otra característica importante de la nube, a saber, la utilización de máquinas virutales, hace que el rendimiento del sistema distribuido en general pueda escalarse prácticamente sin límites. Por ello, es deseable ejecutar el flujo de trabajo en el menor tiempo posible, respetando un presupuesto asignado. Esta flexibilidad sólo es posible encontrarla actualmente en las infraestructuras de servicios de cómputo en la nube. Por esta razón, el sistema administrador de flujos de trabajo tiene que estar fuertemente orientado a trabajar en la nube.
+Aunque se pueden ejecutar Open Grid Scheduler, HTCondor, programas MPI, aplicaciones basadas en MapReduce y cómputo distribuido basado en grafos en la nube, éstos funcionan muy bien en entornos de una sola computadora con gran capacidad o en grids institucionales. Sin embargo, cuando se utilizan estos programas en enfoques como la nube, surgen algunas eventualidades, a saber: 1) es más difícil supervisar estos entornos por el hecho de la insfraestrucutra no es \emph{on-premise} o, en el caso de grids comunitarios, se conoce a ciencia cierta el funcionamiento del sistema y, 2) hay un costo monetario por utilizar estos recursos que está explícitamente establecido, el cual es deseable minimizar. Además, otra característica importante de la nube, a saber, la utilización de máquinas virutales, hace que el rendimiento del sistema distribuido en general pueda escalarse prácticamente sin límites. Por ello, es deseable ejecutar el flujo de trabajo en el menor tiempo posible, respetando un presupuesto asignado. Esta flexibilidad sólo es posible encontrarla actualmente en las infraestructuras de servicios de cómputo en la nube. Por esta razón, el sistema administrador de flujos de trabajo tiene que estar fuertemente orientado a trabajar en la nube.
 
 
 
 \subsection{Intensivo en datos}
 
-Como se ha dicho en la introducción, las cargas de trabajo que administran estos sistemas usualmente generan enormes cantidades de datos, que son desde logs de operación, archivos intermedios de resultados o volcados de memoria en caso de que ocurra algún error. Así, manejar datos es primordial en nuestra solucíón. Este requerimiento se puede cumplir utilizando sistemas de archivos distribuidos con énfasis en la tasa de rendimiento de datos guardados.
+Como se ha dicho en la introducción, las cargas de trabajo que administran estos sistemas usualmente generan enormes cantidades de datos, que van desde logs de operación, archivos intermedios de resultados hasta volcados de memoria en caso de que ocurra algún error. Así, manejar datos es primordial en nuestra solucíón. Este requerimiento se puede cumplir utilizando sistemas de archivos distribuidos con énfasis en la tasa de rendimiento de datos guardados.
 
 
 \subsection{Portable entre nubes}
 
-Esto con el fin de tener la libertad de escoger la plataforma de cómputo en la nube conveniente a las necesidades del flujo.
+El hecho de tener la característica de ser portable entre nubes permite la flexibilidad de escoger la plataforma de cómputo en la nube conveniente a las necesidades de ejecución del flujo de trabajo. Así, es deseable poder escoger ejecutar el flujo de trabajo en Amazon Web Servies, Rackspace o Microsoft Azure (por citar algunos ejemplos), dependiendo de la infraestructura necesaria o prespuesto asignado.
 %Aunque dudo que este requerimiento pueda cumplirse, debido a las abstracciones necesarias que deben hacerse en el software
 
 
 \subsection{Simple}
 
-Las interacciones con el usuario deben ser simples
+Si bien, configurar un flujo de trabajo requiere conocimiento técnico del entorno de cómputo en donde se va a ejecutar, hay ciertos detalles que se pueden abstraer para reducir la carga cognitiva del usuario, de tal modo que éste se enfoque en modelar los pasos, las dependencias de los pasos y las restricciones. De esta forma, el sistema administrador de flujos de trabajo se encargará de organizar y planificar las tareas para cumplir con las restricciones impuestas por el usuarios.
 
 
+\subsection{Basado en estándares abiertos}
 
-\subsection{Basado en estándares}
+Utilizar estándares hace que 1) la curva de aprendizaje para utilizar sistemas de administración de flujos de trabajo sea más suave y 2) se pueda adaptar a soluciones ya existentes. También, el uso de estándares abiertos promueve mantener a la vanguardia la infraestructura tecnológica para ejecutar el flujo de trabajo.
+
+
+\section{Objetivo}
+
+Construir un sistema administrador de flujos de trabajo que esté orientado a utilizar el enfoque de cómputo en la nube.
+
+\section{Organización del documento}
+
+En el capítulo \ref{chap:scheduling_teory}, se revisa la teoría de planificación necesaria para construir un algoritmo acorde al objetivo planteado. Luego, en el capítulo \ref{chap:algorithm} se describe el algoritmo para planficar tareas de un flujo de trabajo en entornos de cómputo en la nube, que es la parte esencial para optimizar la ejecución de los flujos de trabajo. Además, en el capítulo \ref{chap:sweeper} se describe la arquitectura y funcionamiento de Sweeper, el sistema de administrador de flujos de trabajo desarrollado en esta tesis. Finalmente, en el capítulo \ref{chap:conclusions} presentamos conclusiones.
