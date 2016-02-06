@@ -26,3 +26,5 @@
 *_latexmk
 *.fls
 *.pdf
+*.lol
+

@@ -54,9 +54,9 @@
 %\include{statement} %Declaracion de derechos
 %\include{abstracts}
 %\include{ack}
-%\tableofcontents
-%\listoffigures
-%\lstlistoflistings
+\tableofcontents
+\listoffigures
+\lstlistoflistings
 
 \mainmatter
 \include{chap-intro}
@@ -65,8 +65,12 @@
 \include{chap-sweeper}
 \include{chap-conclussions}
 
-\appendix
+%\appendix
 %\include{app}
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{Bibliography}
+
 \bibliographystyle{plain}
 \bibliography{referencias}
 \end{document}
