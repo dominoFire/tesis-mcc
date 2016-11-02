@@ -42,6 +42,9 @@
 \renewcommand{\algorithmicrequire}{\textbf{Entrada:}}
 \renewcommand{\algorithmicensure}{\textbf{Salida:}}
 
+% Para tablas largas
+\usepackage{longtable}
+
 %\usepackage{fixltx2e}
 \MakeRobust{\Call}
 %\renewcommand*\Call[2]{\textproc{#1}(#2)}
@@ -67,8 +70,9 @@
 \include{chap-results}
 \include{chap-conclussions}
 
-%\appendix
-%\include{app}
+\appendix
+\include{app}
+
 \cleardoublepage
 \phantomsection
 \addcontentsline{toc}{chapter}{Bibliography}
