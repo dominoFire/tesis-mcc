@@ -1,0 +1,11 @@
+collection-latexrecommended
+collection-fontsrecommended
+upquote
+asymptote
+amsfonts
+appendix
+preprint
+enumitem
+algorithm
+algorithms
+algorithmicx

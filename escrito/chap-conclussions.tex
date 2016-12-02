@@ -1,10 +1,24 @@
 \chapter{Conclusiones}
 \label{chap:conclusions}
 
+En este trabajo, se propuso un nuevo algoritmo de planificacion de flujos de trabajo, tomando en cuenta su posible ejecución y despliegue en entornos de cómputo en la nube. Este algoritmo, a diferencia de los utlizados para comparar los resultados obtenidos, puede calcular el número mínimo de máquinas o recursos necesarios para correr el flujo de trabajo sin que alguna tarea del flujo de trabajo tenga que esperar por recursos. Otra ventaja de este algoritmo es que se puede utilizar una funci\'on de costo parcial, ya sea para optimizar costo, tiempo de ejecuci\'on u otros requisitos espec\'ificos.
+
+Tambi\'en, en este trabajo se cre\'o un prototipo de un sistema administrador de flujos de trabajo en computo en la nube, llamado sweeper, con el objetivo de vislumbrar cu\'ales son las complejidades de construir un sistema de estos. Sin duda, existen muchos retos t\'ecnicos a solventar, como la administraci\'on de las m\'aquinas virtuales, el almacenamiento y la distribuci\'on de resultados, la configuraci\'on de los programas a ejecutar, entre otros.
+
+
 \section{Trabajo futuro}
 
+Existen múltiples áreas de oportunidad para mejorar este algoritmo, entre ellas se encuentran:
+
 \begin{enumerate}
-\item{Resource pooling}
-\item{Streamming de resultados}
-\item{Docker}
+\item{Una demostraci\'on formal de que el algoritmo ciego calcula el numero \'optimo de m\'aquinas necesarias para alcanzar el paralelismo no bloqueante}
+\item{Nuevas funciones de costo parcial para evaluar el comportamiento del algoritmo utlizando otras fuentes de optimizaci\'on}
+\end{enumerate}
+
+Por otro lado, el prototipo tiene posibles l\'ineas de trabajo futuro, las cuales se mencionan a continuaci\'on:
+
+\begin{enumerate}
+\item{Pooling de m\'aquinas virtuales, debido a que es muy costoso en t\'erminos de tiempo el prender y apagar una m\'aquina virutal.}
+\item{Streaming de resultados. El prototipo actual descarga los resultados de la ejecuci\'on una vez que termin\'o el flujo de trabajo; ser\'ia mejor que entregue resultados conforme se vayan obteniendo.}
+\item{Contenedores. Recientemente, la virtuallizaci\'on a nivel sistema operativo se ha vuelto popular para desplegar servicios en la nube. Su principal caracter\'istica es que pueden crearse m\'as r\'apido que una m\'aquina virtual y que pueden funcionar con un kernel compartido.}
 \end{enumerate}

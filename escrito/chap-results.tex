@@ -2,22 +2,70 @@
 
 En este capitulo presentamos algunos resultados del algoritmo ciego y algunas comparaciones con otros algoritmos de planificación. 
 
-Para probar el algoritmo ciego, se generaron aleatoriamente flujos de trabajo utilizando el simulador de flujos de trabajo. El objetivo de estas simulaciones es comparar cuán óptimas son las planificaciones que genera el algoritmo de planificación propuesto en este trabajo respecto a los algoritmos MaxMin, MinMin y Miope. Cabe aclarar que para estas pruebas, el número y el tipo de recursos es determinado por el algoritmo ciego. Luego, utilizando estos recursos sugeridos por el algoritmo ciego, se generan otras planificaciones con los algoritmos MaxMin, MinMin y Miope. También, es importante notar que a todos los algoritmos se les pidió encontrar la planificación con el menor tiempo total de ejecución (makespan). 
+Para probar el algoritmo ciego, se generaron aleatoriamente flujos de trabajo utilizando el simulador de flujos de trabajo. El objetivo de estas simulaciones es comparar cuán óptimas son las planificaciones que genera el algoritmo de planificación propuesto en este trabajo respecto a los algoritmos MaxMin, MinMin y Miope. Cabe aclarar que para estas pruebas, el número y el tipo de recursos es determinado por el algoritmo ciego. Luego, utilizando estos recursos sugeridos por el algoritmo ciego, se generan otras planificaciones con los algoritmos MaxMin, MinMin y Miope. También, es importante notar que estos tres \'ultimos algoritmos fueron programados para encontrar la planificación con el menor tiempo total de ejecución (makespan). La implementaci\'on del algoritmo ciego se encuentra en \cite{dominofire2014workflowsimulator}.
 
-Para las pruebas, se generaron 100 flujos de trabajo con un número variable de tareas, que van desde 1 hasta 50 tareas. Los factores de complejidad de las tareas varían entre 50 y 100. Cada flujo de trabajo fue generado con base en un generador de números aleatorios congruencial, utilizando una semilla diferente para cada flujo de trabajo.
+Debido a que el algoritmo ciego es configurable, se prob\'o el algoritmo ciego sobre un conjunto de flujos de trabajo de prueba utlizando dos funciones de costo parcial diferentes. La primera funci\'on prueba el algoritmo ciego para que optimice el costo de ejecucion. La segunda funci\'on se utiliz\'o para probar el algoritmo ciego configurado para optimizar el tiempo de ejecuci\'on.
 
-Para evaluar el desempeño de los algoritmos de planificación, se tomaron las planificaciones que arrojaba cada algortmo y con ellas, se calculó el makespan y el costo total de ejecución, definido como el producto del costo por hora de mantener una máquina virtual por el periodo de tiempo por el que la máguina se encuentra prendida, es decir, la diferencia entre el tiempo final de la última tarea a ejecutar por la máquina y el tiempo inicial de la primera tarea a ejecutar.
+Se generaron 1000 flujos de trabajo con un número variable de tareas, que van desde 1 hasta 50 tareas. Los factores de complejidad de las tareas varían entre 50 y 100. Cada flujo de trabajo fue generado con base en un generador de números aleatorios congruencial, utilizando una semilla diferente para cada flujo de trabajo.
 
-En tablas \ref{table:makespans} y \ref{table:costs}, se pueden ver los resultados de las ejecuciones. Como se puede apreciar en las tablas, en los flujos de trabajo número 63, 93 y 95, el algoritmo ciego obtuvo mejores costos de ejecución en comparación con los algoritmos MaxMin, MinMin y Miope. Sin embargo, el algoritmo ciego no pudo obtener una mejoría absoluta en cuanto a tiempo total de ejecución con respecto a los demás algoritmos de planificación. 
+Las configuraciones de recursos utlizados son los siguientes:
 
-Por otra parte, el algoritmo ciego puede ser modificado para utilizar cualquier función de costo parcial que se quiera minimizar. En el caso de esta implementación, se implementaron dos funciones de costo parcial: tiempo total de ejecución y costo total de ejecución. De esta forma, se generaron 100 flujos de trabajo aleatorios y se aplicaron las mismas pruebas que el proceso anterior, variando la funcion de costo parcial para minimizar el costo de ejecución. Para comparar resultados con los demás algoritmos, se programaron que obtuvieran la planificación con el menor tiempo total de ejecución. Si bien, esta prueba no nos puede decir qué tan óptimas son las planificaciones del algoritmo ciego respecto a las planificaciones de los algoritmos MaxMin, MinMin y Miope, esta prueba nos da un indicio sobre qué tan óptimas son las planificaciones del algoritmo ciego en cuanto a tiempo de ejecución. En las tablas XXX y XXX podemos ver dicha métrica. 
+\begin{table}[ht]
+\centering
+\begin{tabular}{lrrrr}
+  \hline
+Configuraci\'on & Cores & $fv$ & Costo/Hr \\ 
+  \hline
+  Small & 1 & 100 & 2.3 \\ 
+  Medium & 2 & 200 & 4.0 \\ 
+  Large & 6 & 400 & 7.0 \\ 
+  ExtraLarge & 8 & 800 & 10.0 \\ 
+   \hline
+\end{tabular}
+\caption{Configuraciones de los recuros utilizados para las pruebas} 
+\label{table:resource_configurations}
+\end{table}
+
+Para evaluar el desempeño de los algoritmos de planificación, se tomaron las planificaciones que arrojaba cada algortmo y con ellas, se calculó tanto el tiempo total de ejecuci\'on como el costo total de ejecución. El segundo es definido como el producto del costo por hora de mantener una máquina virtual por el periodo de tiempo por el que la máguina se encuentra prendida, es decir, la diferencia entre el tiempo final de la última tarea a ejecutar por la máquina y el tiempo inicial de la primera tarea a ejecutar.
+
+En tablas \ref{table:results_makespan} y \ref{table:results_cost}, se pueden ver los resultados de las ejecuciones. Sorprendentemente, los resultados variando la funci\'on de costo parcial son muy parecidos. Esto puede explicarse a que ambas funciones comparten el componente $\frac{fc}{fv}$, donde $fc$ es el factr de complejidad de la tarea y $fv$ es el factor de velocidad del recurso. Adem\'as, La optimizaci\'on de segmentos que realiza el algoritmo ciego, est\'a basada en un algoritmo de programaci\'on din\'amica, lo cual hace que ambas funciones similares obtengan resultados similares, ya que estas funciones de costo parcial obtienen costos proporcionales.
+
+% latex table generated in R 3.3.2 by xtable 1.8-2 package
+% Fri Dec  2 01:23:27 2016
+\begin{table}[ht]
+\centering
+\begin{tabular}{lrrrr}
+  \hline
+Algoritmo & Makespan & Varianza & Costo & Varianza \\ 
+  \hline
+blind & 7.75 & 3.93 & 77.74 & 51.78 \\ 
+  maxmin & 4.23 & 2.70 & 71.23 & 52.05 \\ 
+  minmin & 4.13 & 2.10 & 127.73 & 79.21 \\ 
+  myopic & 5.93 & 3.27 & 226.37 & 133.82 \\ 
+   \hline
+\end{tabular}
+\caption{Resultados agredado de los algoritmos usando el algoritmo ciego para optimizar makespan} 
+\label{table:results_makespan}
+\end{table}
 
 
+% latex table generated in R 3.3.2 by xtable 1.8-2 package
+% Fri Dec  2 01:24:51 2016
+\begin{table}[ht]
+\centering
+\begin{tabular}{lrrrr}
+  \hline
+Algoritmo & Makespan & Varianza & Costo & Varianza \\ 
+  \hline
+blind & 7.75 & 3.93 & 77.74 & 51.78 \\ 
+  maxmin & 4.23 & 2.70 & 71.04 & 52.10 \\ 
+  minmin & 4.13 & 2.10 & 127.95 & 79.43 \\ 
+  myopic & 5.92 & 3.26 & 226.33 & 133.87 \\ 
+   \hline
+\end{tabular}
+\caption{Resultados agredado de los algoritmos usando el algoritmo ciergo para optimizar costo} 
+\label{table:results_cost}
+\end{table}
 
 
-\section{Discusión de resultados}
-
-Esto se debe a que hay algunos detalles con el algoritmo
-
-1) Está pensado para ser más flexible y/o extensible.
-2)
+Si bien, analizando los resultados de las tablas anteriores, el algoritmo ciego tiene makespans promedios bastante altos comparados con los otros tres algoritmos. Sin embargo, el algoritmo ciego obtiene el segundo mejor costo promedio de los algoritmos comparados. 
