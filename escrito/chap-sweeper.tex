@@ -1,7 +1,7 @@
 \chapter[Sweeper]{Sweeper: ejecución de flujos de trabajo en cómputo en la nube}
 \label{chap:sweeper}
 
-En este capítulo se describen los detalles del funcionamiento de Sweeper \cite{dominofire2015sweeper}, el sistema de administración de flujos de trabajo orientado a cómputo en la nube. Utilizando este paquete, se pueden ejecutar tareas expresadas como comando de una terminal Linux, con dependencias de orden entre ellas entre recursos en la nube. Sweeper está desarrollado en el lenguaje de programación Python \cite{python3}.
+En este capítulo se describen los detalles del funcionamiento de Sweeper \cite{dominofire2015sweeper}, el sistema de administración de flujos de trabajo orientado a cómputo en la nube. Utilizando este paquete, se pueden ejecutar tareas expresadas como comandos de una terminal Linux, con dependencias de orden entre estas tareas, ejecutadas remotamente en m\'aquinas virtuales en la nube. Sweeper está desarrollado en el lenguaje de programación Python \cite{python3}.
 
 Para ejecutar flujos de trabajo con Sweeper, se especifican las tareas del flujo de trabajo y sus dependencias. Sweeper lee este archivo de descripción y enseguida estima los tiempos de ejecución de las tareas y elige la mejor asignación de máquinas virtuales y tareas del flujo de trabajo que optimicen los criterios dados.
 
@@ -26,7 +26,7 @@ workflow:
     depends: [create_filelist, create_sysinfo]
 \end{lstlisting}
 
-En el listado de código anterior se muestra la descripcion de un flujo de trabajo que lista los archivos contenidos en las máquinas virtuales que ejecutan este flujo. También, este flujo trabajo contiene una tarea para recolectar la información de la versión del sistema operativo que ejecuta la máquina virtual. Por otro lado, en la figura \ref{fig:workflow_test} se encuentra la representación visual de este flujo de trabajo. 
+En el listado de código \ref{code:workflow_example} se muestra la descripcion de un flujo de trabajo que imprime los nombres de los archivos contenidos en las máquinas virtuales que ejecutan este flujo. También, este flujo trabajo contiene una tarea para recolectar la información de la versión del sistema operativo que ejecuta la máquina virtual. Por otro lado, en la figura \ref{fig:workflow_test} se encuentra la representación visual de este flujo de trabajo. 
 
 \begin{figure}
 \begin{center}
@@ -37,7 +37,8 @@ En el listado de código anterior se muestra la descripcion de un flujo de traba
 \end{figure}
 
 
-En el ejemplo anterior puede apreciar los elementos básicos que componen una tarea del flujo de trabajo, explicados a continuación:
+En el ejemplo anterior se pueden apreciar los elementos básicos que componen una tarea del flujo de trabajo, los cuales son explicados a continuación:
+
 
 \begin{itemize}
 \item{\texttt{name}: Nombre de la tarea, que es único entre los nombres de las demás tareas del flujo de trabajo.}
@@ -47,7 +48,7 @@ En el ejemplo anterior puede apreciar los elementos básicos que componen una ta
 \item{\texttt{include\_files}: Lista de los archivos que deben ser subidos al cluster antes de que la tarea sea ejecutada.}
 \end{itemize}
 
-Una característica importante de Sweeper que lo hace único a otros sistemas de administración de flujos de trabajo, es la expansión de parámetros. El usuario puede especificar una tarea que se requiera ejecutar con un conjunto predefinido de argumentos. Sweeper calcula todas las combinaciones posibles de parámetros y automáticamente crea una tarea a ejecutarse por cada posible conjunto de parámetros. Así, en el listado de código \ref{code:forests_2} se puede notar cómo se denotan las listas de parámetros de donde se generan las combinaciones de argumentos. En la figura \ref{fig:workflow_forests} se encuentra la representación completa de este flujo de trabajo.
+Una característica importante de Sweeper que lo hace único a otros sistemas de administración de flujos de trabajo, es la expansión de parámetros. El usuario puede especificar una tarea que se requiera ejecutar con un conjunto predefinido de argumentos. Sweeper calcula todas las combinaciones posibles de parámetros y automáticamente crea una tarea a ejecutarse por cada posible combinaci\'on de parámetros. Esto es de gran utilidad para la ejecución de experimentos y para la ejecución de aplicaciones de barrido de parámetros. Así, en el listado del código \ref{code:forests_2} se muestra un flujo de trabajo que utliza listas de parámetros de donde se generan las combinaciones de argumentos. En la figura \ref{fig:workflow_forests} se encuentra la representación gr\'afica de este flujo de trabajo.
 
 \begin{figure}
 \begin{center}
@@ -131,7 +132,7 @@ workflow:
 
 \section{Arquitectura}
 
-En figura \ref{fig:sweeper-arch} se muestra la arquitectura de Sweeper, en donde se pueden notar cuatro grandes componentes: la ejecucíón del flujo de trabajo, el planificador, el perfilador de las tareas y el perfilador de los recursos. Sweeper utiliza las interfaces de programación de aplicaciones de cada proveedor de servicios de cómputo en la nube para reservar, ejecutar y administrar los recursos utilizados en la nube de cada proveedor. Actualmente, Sweeper puede trabajar con los servicios de cómputo en la nube de Microsoft Azure \cite{microsoft2015azure}. En las siguientes subsecciones, describiremos a detalle cada uno de los componentes de Sweeper.
+En figura \ref{fig:sweeper-arch} se muestra la arquitectura de Sweeper, en donde se pueden los grandes componentes: la ejecución del flujo de trabajo y el planificador. Sweeper utiliza las interfaces de programación de aplicaciones de cada proveedor de servicios de cómputo en la nube para reservar, ejecutar y administrar los recursos utilizados en la nube de cada proveedor. Actualmente, Sweeper puede trabajar con los servicios de cómputo en la nube de Microsoft Azure \cite{microsoft2015azure}. En las siguientes subsecciones, describiremos a detalle cada uno de los componentes de Sweeper.
 
 \begin{figure}
 \begin{center}
@@ -154,17 +155,18 @@ El planificador busca la asignación de recursos que optimice la calidad en el s
 
 
 
-\subsection{Perfilador de tareas}
+% \subsection{Perfilador de tareas}
 
-El perfilador de tareas se utiliza para obtener un modelo de la estimación de tiempos de ejecución independiente de la máquina, el cual es útil para generar planificaciones que optimicen el tiempo total de ejecución o el presupuesto utilizado para la ejecución del flujo de trabajo. A grandes rasgos, el Perfilador de tareas mide el tiempo de ejecución de cada tarea de un flujo de trabajo, guardando un registro de estos tiempos de ejecución junto con los parámetros que se utilizaron para invocar cada tarea.
+% El perfilador de tareas se utiliza para obtener un modelo de la estimación de tiempos de ejecución independiente de la máquina, el cual es útil para generar planificaciones que optimicen el tiempo total de ejecución o el presupuesto utilizado para la ejecución del flujo de trabajo. A grandes rasgos, el Perfilador de tareas mide el tiempo de ejecución de cada tarea de un flujo de trabajo, guardando un registro de estos tiempos de ejecución junto con los parámetros que se utilizaron para invocar cada tarea.
 
-Para utilizar el perfilador, hay que invocar Sweeper con la opción \texttt{profile} en la carpeta en donde se encuentre el archivo de flujo de trabajo (\texttt{workflow.yaml}) que se quiera ejecutar, de la siguiente forma:
+% Para utilizar el perfilador, hay que invocar Sweeper con la opción \texttt{profile} en la carpeta en donde se encuentre el archivo de flujo de trabajo (\texttt{workflow.yaml}) que se quiera ejecutar, de la siguiente forma:
 
-\begin{lstlisting}[language=bash]
-$ sweeper profile
-\end{lstlisting}
+% \begin{lstlisting}[language=bash]
+% $ sweeper profile
+% \end{lstlisting}
 
 
-\subsection{Perfilador de recursos}
+% \subsection{Perfilador de recursos}
 
-También, para estimar la velocidad de las máquinas virtuales de un proveedor, sweeper se auxilia del PerfKitBenchmarker, un software diseñado para correr benchmarks, los cuales son pruebas de estrés que ejecutan las máquinas virtuales, cuyos resultados son analizados posteriormente. Para el caso de Sweeper, se utilzan las mediciones de FLOPS que provee el benchmark SPECfp.
+% También, para estimar la velocidad de las máquinas virtuales de un proveedor, sweeper se auxilia del PerfKitBenchmarker, un software diseñado para correr benchmarks, los cuales son pruebas de estrés que ejecutan las máquinas virtuales, cuyos resultados son analizados posteriormente. Para el caso de Sweeper, se utilzan las mediciones de FLOPS que provee el benchmark SPECfp.
+
