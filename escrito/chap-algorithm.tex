@@ -178,6 +178,38 @@ Ahora, en los pseudocódigos \ref{alg_blind_take} y \ref{alg_blind_check_take}, 
 
 
 \begin{algorithm}
+\caption{Asignación óptima por búsqueda exhaustiva}
+\label{alg_blind_take_exhaustive}
+\begin{algorithmic}[1]
+\Require{Lista de tareas y configuraciones a asignar}
+\Ensure{Una asignación óptima para el segmento}
+\Procedure{take\_exhaustive}{$t_i$, $rc_i$}
+	\If{$rc_i = |resource\_configs|$}
+		\State{\Return{$\infty$}}
+	\EndIf
+
+	\If{$t_i = |tasks|$}
+		\State{\Return{\Call{checkMapping}{}}}
+	\EndIf
+
+	\State{\Call{pushEntry}{$t_i$, $rc_i$}}
+	\State{$coresUsed[rc_i] \gets coresUsed[rc_i] + 1$}
+	\State{$takedYes \gets \Call{take}{t_i + 1, 0}$}
+
+	\State{$coresUsed[rc_i] \gets coresUsed[rc_i] - 1$}
+	\State{\Call{popEntry}{$t_i$, $rc_i$}}
+	\State{$takedNot \gets \Call{take}{t_i, rc_i + 1}$}
+
+	\If{$takedYes = \infty \land takenNot = \infty$}
+		\State{\Return{$\infty$}}
+	\EndIf
+
+	\State{\Return{$\min(takedYes, takenNot)$}}
+\EndProcedure
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
 \caption{C\'alculo de costos de ejecución de un segmento de un flujo de trabajo}
 \label{alg_blind_take}
 \begin{algorithmic}[1]
