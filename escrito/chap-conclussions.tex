@@ -20,7 +20,6 @@ Por otro lado, el prototipo tiene posibles l\'ineas de trabajo futuro, las cuale
 \begin{enumerate}
 \item{Pooling de m\'aquinas virtuales, debido a que es muy costoso (en t\'erminos de tiempo) prender y apagar m\'aquinas virutales.}
 \item{Entrega progresiva de resultados. El prototipo actual descarga los resultados de la ejecuci\'on una vez que termin\'o el flujo de trabajo; ser\'ia mejor que entregue resultados conforme se vayan obteniendo.}
-\item{Perfiladores de recursos}
-\item{Perfiladores de tareas}
+\item{Perfiladores de recursos y de tareas. Los algoritmos de planificación de flujos de trabajo generan mejores asignaciones si conocen con certeza el tiempo de ejecución de las tareas en los recursos disponibles. Si el sistema administrador de flujos de trabajo puede obtener esta información a través del análisis del uso de recursos, entonces podrá hacer mejores asignaciones.}
 \item{Utilizar contenedores. Recientemente, la virtuallizaci\'on a nivel sistema operativo se ha vuelto popular para desplegar servicios en la nube. Su principal caracter\'istica es que pueden crearse m\'as r\'apido que una m\'aquina virtual y que pueden funcionar con un kernel compartido.}
 \end{enumerate}

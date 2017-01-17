@@ -1,6 +1,6 @@
 \documentclass[oneside]{book}
 \usepackage[utf8]{inputenc}
-\usepackage[spanish]{babel}
+\usepackage[spanish,mexico]{babel}
 \selectlanguage{spanish} 
 \usepackage{cite,url,graphicx,epsfig,amsmath,amssymb,amsthm,appendix,authblk}
 \usepackage[hidelinks,bookmarks=true]{hyperref}
@@ -27,7 +27,7 @@
   basicstyle=\footnotesize\ttfamily,  % size of fonts used for the code
   breaklines=true,                    % automatic line breaking only at whitespace
   captionpos=b,                       % sets the caption-position to bottom
-  commentstyle=\color{mygreen},       % comment style
+  commentstyle=\color{mygreen},       % comment style\tablename
   escapeinside={\%*}{*)},             % if you want to add LaTeX within your code
   keywordstyle=\color{blue},          % keyword style
   stringstyle=\color{mymauve},        % string literal style
@@ -37,14 +37,13 @@
 \renewcommand{\lstlistingname}{Código}
 \renewcommand{\lstlistlistingname}{Lista de \lstlistingname s}
 
-
 \usepackage[spanish,Algoritmo]{algorithm} % Pseudocódigo de algoritmos (Gracias Andreu)
 \usepackage{algpseudocode}
 \renewcommand{\algorithmicrequire}{\textbf{Entrada:}}
 \renewcommand{\algorithmicensure}{\textbf{Salida:}}
 
 % Para tablas largas
-\usepackage{longtable}
+%\usepackage{longtable}
 
 %\usepackage{fixltx2e}
 \MakeRobust{\Call}

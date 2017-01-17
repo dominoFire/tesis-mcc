@@ -32,7 +32,7 @@ En el listado de código \ref{code:workflow_example} se muestra la descripcion d
 \begin{center}
 \includegraphics[width=0.8\textwidth]{imagenes/workflow_test.png}
 \end{center}
-\caption{Visualización del flujo de trabajo \emph{test} }
+\caption{Visualización del flujo de trabajo \emph{test}.}
 \label{fig:workflow_test}
 \end{figure}
 
@@ -54,11 +54,11 @@ Una característica importante de Sweeper que lo hace único a otros sistemas de
 \begin{center}
 \includegraphics[width=0.8\textwidth]{imagenes/workflow_forests.png}
 \end{center}
-\caption{Visualización del flujo de trabajo \emph{forests} }
+\caption{Visualización del flujo de trabajo \emph{forests}, descrito en los códigos \ref{code:forests_1} y \ref{code:forests_2}.}
 \label{fig:workflow_forests}
 \end{figure}
 
-\begin{lstlisting}[label={code:forests_1},caption={Flujo de trabajo para búsqueda de parámetros (parte 1).},float]
+\begin{lstlisting}[label={code:forests_1},caption={Flujo de trabajo para búsqueda de parámetros \emph{forests} (parte 1).},float]
 workflow:
   - name: change_locale
     command: |
@@ -109,7 +109,7 @@ workflow:
     depends: [data_split]
 \end{lstlisting}
 
-\begin{lstlisting}[label={code:forests_2},caption={Flujo de trabajo para búsqueda de parámetros (parte 2).},float]
+\begin{lstlisting}[label={code:forests_2},caption={Flujo de trabajo para búsqueda de parámetros \emph{forests} (parte 2).},float]
   - name: model_fit
     command: |
         doger gridsearch \
@@ -149,9 +149,9 @@ Este componente se encarga de ejecutar el flujo de trabajo en los recursos en la
 
 
 
-\subsection{Planifcador}
+\subsection{Planificador}
 
-El planificador busca la asignación de recursos que optimice la calidad en el servicio en la ejecución del flujo de trabajo, interpretado como restricciones de presupuesto o restricciones de fechas límite. 
+El planificador (descrito en el algoritmo \ref{alg_blind_main}) busca la asignación de recursos que optimice la calidad en el servicio en la ejecución del flujo de trabajo, interpretado como restricciones de presupuesto o restricciones de fechas límite. 
 
 
 
