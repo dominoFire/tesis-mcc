@@ -187,7 +187,7 @@ Los siguientes parámetros:
 \end{algorithm}
 
 
-Ahora, en los pseudocódigos \ref{alg_blind_take_exhaustive} y \ref{alg_blind_check_mappings}, se muestran los procedimentos principales para generar la asignación de recursos de un segmento de tareas un flujo de trabajo. El procedimiento del pseudocódigo \ref{alg_blind_take_exhaustive} calcula recursivamente el costo de la asignación óptima, de acuerdo a la funci\'on de costo definida por el usuario. El procedimiento del pseudoc\'odigo \ref{alg_blind_check_mappings} verifica que la solución encontrada por el primer procedimiento sea una solución válida. Además, conserva la mejor solución encontrada. Es decir, conserva la mejor lista de asignaciones tarea - configuración de recurso encontrada.
+Ahora, en los pseudocódigos \ref{alg_blind_take_exhaustive} y \ref{alg_blind_check_mappings}, se muestran los procedimentos principales para generar la asignación de configuraciones de recursos a las tareas de un segmento de un flujo de trabajo. El procedimiento del pseudocódigo \ref{alg_blind_take_exhaustive} calcula recursivamente el costo de la asignación óptima, de acuerdo a la funci\'on de costo definida por el usuario. El procedimiento del pseudoc\'odigo \ref{alg_blind_check_mappings} verifica que la solución encontrada por el primer procedimiento sea una solución válida. Además, conserva la mejor solución encontrada. Es decir, conserva la mejor lista de asignaciones tarea - configuración de recursos encontrada.
 
 
 \begin{algorithm}
@@ -341,7 +341,7 @@ Finalmente, en el pseudocódigo \ref{alg_blind_main} se muestra el procedimiento
 
 \subsection{Ejecución}
 
-Una vez que se tienen las asignaciones de tareas y recursos, se ejecuta el flujo de trabajo. El algoritmo del pseudoc\'odigo \ref{alg_manage_execution} muestra el procedimiento para administrar la ejecuci\'on del flujo de trabajo. La idea b\'asica es utilizar varias listas para mantener el estado de las tareas listas, en ejecuci\'on y terminadas. Todas las tareas se ejecutan concurrentemente en las m\;aquinas virtuales asignadas por el algoritmo de planificaci\'on.
+Una vez que se tienen las asignaciones de tareas y recursos, se ejecuta el flujo de trabajo. El algoritmo del pseudoc\'odigo \ref{alg_manage_execution} muestra el procedimiento para administrar la ejecuci\'on del flujo de trabajo. La idea b\'asica es utilizar varias listas para mantener el estado de las tareas listas, en ejecuci\'on y terminadas. Todas las tareas se ejecutan concurrentemente en las máquinas virtuales asignadas por el algoritmo de planificaci\'on.
 
 \begin{algorithm}
 \caption{Ejecuci\'on de tareas en las m\'aquinas virtuales}
@@ -385,7 +385,7 @@ Una vez que se tienen las asignaciones de tareas y recursos, se ejecuta el flujo
 
 \subsection{Descarga de resultados}
 
-Finalmente, si en las tareas hay una entrada que indique descargar los resultados, se transfieren los archivos especificados a la máquina principal que administra la ejecuci\'on del flujo de trabajo. Estos archivos son transferidos a trav\'es del protocolo SCP, el mismo protocolo \cite{rfc4251} que se ocupa en los comandos \texttt{scp} (Secure Copy) y \texttt{ssh} (Secure Shell). La descarga de estos archivos ocurre justo despu\'es de que la tarea es completada sin errores. Los archivos son descargados de forma s\'incrona, lo cual implica que el programa adminisrador espera a descargar los archivos de cada tarea.
+Finalmente, si en las tareas hay una entrada que indique descargar los resultados, se transfieren los archivos especificados a la máquina principal que administra la ejecuci\'on del flujo de trabajo. Estos archivos son transferidos a trav\'es del protocolo SCP \cite{rfc4251}, el mismo protocolo que se ocupa en los comandos \texttt{scp} (Secure Copy) y \texttt{ssh} (Secure Shell). La descarga de estos archivos ocurre justo despu\'es de que la tarea es completada sin errores. Los archivos son descargados de forma s\'incrona, lo cual implica que el programa adminisrador espera a descargar los archivos de cada tarea.
 
 
 Una vez descrito los tres algoritmos de la secci\'on anterior, podemos juntarlos en un solo procedimiento para generar planificaciones de flujos de trabajo sobre recursos din\'amicos de c\'omputo en la nube. El pseudoc\'odigo \ref{alg_schedule_main} muestra la unión de estos algoritmos para generar planificaciones.

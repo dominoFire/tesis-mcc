@@ -36,7 +36,7 @@ Los sistemas de cómputo distribuido tienen una complexidad inherente que crece 
 En plataformas de c\'omputo en la nube es posible ejecutar cualquier software que se pueda ejecutar en una computadora personal convencional. Esto incluye software administradores de procesos como Open Grid Scheduler \cite{univa2016gridengine}, HTCondor \cite{htcondor2014webpage}; programas escritos con primitivas MPI \cite{mpiforum2016mpi}, aplicaciones basadas en el paradigma MapReduce \cite{dean2008mapreduce} y programas descritos como grafos utilizando el marco de trabajo GraphLab \cite{low2014graphlab}. Estos programas antes mencionados funcionan muy bien en entornos de una sola computadora con gran capacidad o en grids institucionales. Sin embargo, cuando se utilizan estos programas en enfoques como la nube, surgen algunas eventualidades, a saber:
 
 \begin{enumerate}
-\item Es más difícil supervisar estos entornos debido a que la infraestrucutra se encuentra fisicamente. Es decir, se tiene que monitorear el cluster desde una red cuya latencia es mayor a la de una red local. 
+\item Es más difícil supervisar estos entornos debido a que no se puede acceder a la infraestrucutra fisicamente. Es decir, se tiene que monitorear el cluster desde una red cuya latencia es mayor a la de una red local. 
 
 \item hay un costo monetario por utilizar estos recursos que está explícitamente establecido, el cual es deseable minimizar. 
 \end{enumerate}
@@ -79,10 +79,10 @@ En este trabajo, se realiz\'o un prototipo del sistema administrador de flujos d
 Para lograr el objetivo antes planteado, se realizaron estos pasos:
 
 \begin{enumerate}
-\item Revisi\'on del estado del arte de algoritmos de planificaci\'on. En todos los sistemas administradoes de flujos de trabajo, uno de lo componentes principales es el planificador de recusos, compuesto principalmente por el algoritmo de planificaci\'on. La revisi\'on de los algoritmos disponibles sirvi\'o de base para formular el algoritmo de planificaci\'on para entornos de c\'omputo en la nube.
-\item Formulaci\'on de la interfaz de descripcion de flujos de trabajo. Varios sisteamas administradores proveedn interfaces gr\'aficas para crear flujos de trabajo como Kepler \cite{altintas2016kepler}. Para simplificar el desarrollo del prototipo, se decidi\'o usar archivos YAML con una estructura predeterminada para describir un flujo de trabajo.
-\item Desarrollo del algoritmo de planficaci\'on para c\'omputo en la nube. A la par del desarrollo del prototipo, se formul\'o el algoritmo de planificaci\'on. La premisa base de este algoritmo es que pueda optimizar tanto costo como tiempo de ejecuci\'on. Sin embargo, se puso \'enfasis en la optimizaci\'on de costo, porque se contaba con una cantidad limitada de presupuesto para ejecutar flujos de trabajo en la nube. 
-\item Pruebas experimentales. Se generaron flujos de trabajo para probar el protipo. Cabe aclarar que el nuevo algoritmo de planificaci\'on fue probado con simulaciones.
+\item Revisi\'on del estado del arte de algoritmos de planificaci\'on. En todos los sistemas administradores de flujos de trabajo, uno de lo componentes principales es el planificador de recursos, compuesto principalmente por el algoritmo de planificaci\'on. La revisi\'on de los algoritmos disponibles sirvi\'o de base para formular el algoritmo de planificaci\'on para entornos de c\'omputo en la nube.
+\item Formulaci\'on de la interfaz de descripcion de flujos de trabajo. Varios sistemas administradores proveen interfaces gr\'aficas para crear flujos de trabajo como Kepler \cite{altintas2016kepler}. Para simplificar el desarrollo del prototipo, se decidi\'o usar archivos YAML con una estructura predeterminada para describir un flujo de trabajo.
+\item Desarrollo del algoritmo de planificaci\'on para c\'omputo en la nube. A la par del desarrollo del prototipo, se formul\'o el algoritmo de planificaci\'on. La premisa base de este algoritmo es que pueda optimizar tanto costo como tiempo de ejecuci\'on. Sin embargo, se puso \'enfasis en la optimizaci\'on de costo, porque se contaba con una cantidad limitada de presupuesto para ejecutar flujos de trabajo en la nube. 
+\item Pruebas experimentales. Se generaron flujos de trabajo para probar el prototipo. Cabe aclarar que el nuevo algoritmo de planificaci\'on fue probado con simulaciones.
 \end{enumerate}
 
 \section{Organización del documento}

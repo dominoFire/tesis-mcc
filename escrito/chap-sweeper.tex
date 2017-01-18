@@ -136,7 +136,7 @@ En figura \ref{fig:sweeper-arch} se muestra la arquitectura de Sweeper, en donde
 
 \begin{figure}
 \begin{center}
-%\includegraphics[width=0.8\textwidth]{imagenes/sweeper-architecture.pdf}
+\includegraphics[width=0.8\textwidth]{imagenes/sweeper-architecture-crop.pdf}
 \end{center}
 \caption{Arquitectura de Sweeper}
 \label{fig:sweeper-arch}
@@ -155,9 +155,11 @@ El planificador (descrito en el algoritmo \ref{alg_blind_main}) busca la asignac
 
 
 
-% \subsection{Perfilador de tareas}
+\subsection{Perfilador de tareas}
 
-% El perfilador de tareas se utiliza para obtener un modelo de la estimación de tiempos de ejecución independiente de la máquina, el cual es útil para generar planificaciones que optimicen el tiempo total de ejecución o el presupuesto utilizado para la ejecución del flujo de trabajo. A grandes rasgos, el Perfilador de tareas mide el tiempo de ejecución de cada tarea de un flujo de trabajo, guardando un registro de estos tiempos de ejecución junto con los parámetros que se utilizaron para invocar cada tarea.
+El perfilador de tareas se utiliza para obtener un modelo de la estimación de tiempos de ejecución independiente de la máquina, el cual es útil para generar planificaciones que optimicen el tiempo total de ejecución o el presupuesto utilizado para la ejecución del flujo de trabajo. A grandes rasgos, el Perfilador de tareas mide el tiempo de ejecución de cada tarea de un flujo de trabajo, guardando un registro de estos tiempos de ejecución junto con los parámetros que se utilizaron para invocar cada tarea.
+
+En este prototipo se utiliza el comando \texttt{aprof}, cuyo código fuente se encuentra disponible en \cite{ercoppa2017aprof}.
 
 % Para utilizar el perfilador, hay que invocar Sweeper con la opción \texttt{profile} en la carpeta en donde se encuentre el archivo de flujo de trabajo (\texttt{workflow.yaml}) que se quiera ejecutar, de la siguiente forma:
 
@@ -166,7 +168,6 @@ El planificador (descrito en el algoritmo \ref{alg_blind_main}) busca la asignac
 % \end{lstlisting}
 
 
-% \subsection{Perfilador de recursos}
+\subsection{Perfilador de recursos}
 
-% También, para estimar la velocidad de las máquinas virtuales de un proveedor, sweeper se auxilia del PerfKitBenchmarker, un software diseñado para correr benchmarks, los cuales son pruebas de estrés que ejecutan las máquinas virtuales, cuyos resultados son analizados posteriormente. Para el caso de Sweeper, se utilzan las mediciones de FLOPS que provee el benchmark SPECfp.
-
+También, para estimar la velocidad de las máquinas virtuales de un proveedor, sweeper se auxilia del PerfKitBenchmarker \cite{google2017perfkitbenchmarker}, un software diseñado para correr benchmarks, los cuales son pruebas de estrés que ejecutan las máquinas virtuales, cuyos resultados son analizados posteriormente. Para el caso de Sweeper, se utilzan las mediciones de operaciones de punto flotante por segundo (FLOPS por sus siglas en inglés) que provee el benchmark SPECfp \cite{spec2016specfp}.

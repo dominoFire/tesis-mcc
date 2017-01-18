@@ -1,15 +1,16 @@
 \chapter{Resultados}
 \label{chap:results}
 
-En este capítulo presentamos algunos resultados del algoritmo ciego y algunas comparaciones con otros algoritmos de planificación. 
+
+En este capítulo presentamos una comparación entre algoritmos voraces de planificación y el algoritmo de planificación propuesto en esta tesis (vea capítulo \ref{chap:algorithm}), al cual llamaremos el algoritmo ciego. Se denominó algoritmo ciego debido a que, en comparación con el algoritmo Miope \cite{ramamritham1990efficient}, está cegado explícitamente a través de la división del flujo de trabajo en segmentos independientes, generando planificaciones de cada uno de los segmentos que son independientes entre sí.
 
 Para evaluar el algoritmo ciego, se generaron aleatoriamente flujos de trabajo utilizando un simulador de flujos de trabajo. El objetivo de estas simulaciones es comparar cuán óptimas son las planificaciones que genera el algoritmo de planificación propuesto en este trabajo respecto a los algoritmos MaxMin, MinMin y Miope. Cabe aclarar que para estas pruebas, el número y el tipo de recursos es determinado por el algoritmo ciego. Luego, utilizando estos recursos sugeridos por el algoritmo ciego, se generan otras planificaciones con los algoritmos MaxMin, MinMin y Miope. También, es importante notar que estos tres \'ultimos algoritmos fueron programados para encontrar la planificación con el menor tiempo total de ejecución (makespan). La implementaci\'on del algoritmo ciego se encuentra disponible en \cite{dominofire2014workflowsimulator}.
 
-Debido a que el algoritmo ciego es configurable, se prob\'o el algoritmo ciego sobre un conjunto de flujos de trabajo de prueba utlizando dos funciones de costo parcial diferentes. La primera funci\'on evalua el algoritmo ciego para con respecto al costo de ejecucion. La segunda funci\'on se utiliz\'o para evaluar el algoritmo ciego con respecto al tiempo de ejecuci\'on.
+Debido a que el algoritmo ciego es configurable, se prob\'o el algoritmo ciego sobre un conjunto de flujos de trabajo de prueba utlizando dos funciones de costo parcial diferentes. La primera funci\'on evalua el algoritmo ciego con respecto al costo de ejecución. La segunda funci\'on se utiliz\'o para evaluar el algoritmo ciego con respecto al tiempo de ejecuci\'on.
 
 Se generaron 1000 flujos de trabajo con un número variable de tareas, que van desde 1 hasta 50 tareas. Los factores de complejidad de las tareas varían entre 50 y 100. Cada flujo de trabajo fue generado con base en un generador de números aleatorios congruencial, utilizando una semilla diferente para cada flujo de trabajo.
 
-Las configuraciones de recursos utlizados se encuentran en la tabla \ref{table:resource_configurations}.
+Las configuraciones de recursos utlizadas se encuentran en la tabla \ref{table:resource_configurations}.
 
 \begin{table}[ht]
 \centering
@@ -29,7 +30,7 @@ Configuraci\'on & Cores & $fv$ & Costo/Hr \\
 
 Para evaluar el desempeño de los algoritmos de planificación, se tomaron las planificaciones que arrojaba cada algoritmo y con ellas, se calculó tanto el tiempo total de ejecuci\'on como el costo total de ejecución. El costo de ejecución es definido como el producto entre (1) el costo por hora de las máquinas virtuales utilizadas y (2) el número de horas utilizadas de cada máquina, es decir, la diferencia entre el tiempo final de la última tarea a ejecutar por la máquina y el tiempo inicial de la primera tarea a ejecutar.
 
-En tablas \ref{table:results_makespan} y \ref{table:results_cost}, se pueden ver los resultados de las ejecuciones. Sorprendentemente, los resultados variando la funci\'on de costo parcial son muy parecidos. Esto puede explicarse a que ambas funciones comparten el componente $\frac{f_c}{f_v}$, donde $f_c$ es el factor de complejidad de la tarea y $f_v$ es el factor de velocidad del recurso. Además, la optimización de segmentos que realiza el algoritmo ciego, está basada en un algoritmo de búsqueda en profundidad, lo cual hace que ambas funciones similares obtengan resultados similares, ya que estas funciones de costo parcial obtienen costos proporcionales. Por
+En las tablas \ref{table:results_makespan} y \ref{table:results_cost}, se pueden ver los resultados de las ejecuciones. Sorprendentemente, los resultados variando la funci\'on de costo parcial son muy parecidos. Esto puede explicarse a que ambas funciones comparten el componente $\frac{f_c}{f_v}$, donde $f_c$ es el factor de complejidad de la tarea y $f_v$ es el factor de velocidad del recurso. Además, la optimización de segmentos que realiza el algoritmo ciego, está basada en un algoritmo de búsqueda en profundidad, lo cual hace que ambas funciones similares obtengan resultados similares, ya que estas funciones de costo parcial obtienen costos proporcionales.
 
 
 % latex table generated in R 3.3.2 by xtable 1.8-2 package
