@@ -56,17 +56,17 @@ De esta forma, el primer paso del algoritmo de planificación es dividir el fluj
 
 \subsubsection{Segmentación del flujo de trabajo}
 
-Para generar los segmentos, se utiliza la definición de Saifullah et. al \cite{saifullah2013multi} basada en la profundidad de cada nodo del grafo dirigido ac\'iclico que representa el flujo de trabajo.
+Para generar los segmentos, se utiliza la definición de Saifullah et. al \cite{saifullah2013multi} basada en la profundidad de cada nodo del grafo dirigido acíclico que representa el flujo de trabajo.
 
 \begin{defn}
 
-La \textbf{profundidad} $h$ de una tarea $t$ de un flujo de trabajo está definida como:
+La \textbf{profundidad} $H$ de una tarea $t$ de un flujo de trabajo está definida como:
 
 \begin{displaymath}
-h(x) = \left\{
+H(x) = \left\{
      \begin{array}{lr}
-       \max_{u \in \text{Padres}(t) } h(u) + 1 & : | \text{Padres}(t) | \neq 0 \\
-       1                                       & : | \text{Padres}(t) | = 0
+       \max_{u \in \text{Padres}(t) } H(u) + 1 & : \text{Padres}(t) \neq \varnothing \\
+       1                                       & : \text{Padres}(t) = \varnothing
      \end{array}
    \right.
 \end{displaymath}
@@ -74,7 +74,18 @@ h(x) = \left\{
 \noindent Donde $\text{Padres}(t)$ es el conjunto de tareas que inmediatamente preceden a la tarea $t$, es decir, aquellas tareas $u$ que tienen una dependencia de orden que va a la tarea $t$.
 \end{defn}
 
-En la figura \ref{fig:DAG_to_segment} se puede apreciar un ejemplo de este algoritmo, en donde se puede ver que a cada tarea del flujo de trabajo se le asigna un segmento, en cual se está garantizando que cada segmento sólo dependa del segmento anterior.
+La profundidad $H$ es definida recursivamente sobre las depdendencias que tiene cada tarea en un flujo de trabajo. Las tareas que no tienen dependencias (o padres), tendrán profundidad $H = 1$; mientras que las tareas que tengan dependencias, tendrán profundidad igual a la profundidad más alta de alguna de sus dependencias sumada en 1. Este último sumando representa, por definición, la profundidad que tiene cada una de las tareas del flujo de trabajo sin importar sus dependencias. Por lo tanto, las tareas siempre tendrán profundidades $H$ diferentes a las profunidades $H'$ de sus padres (o dependencias). Así, se puede definir los segmentos de un flujo de trabajo de la siguiente forma:
+
+\begin{defn}
+Un \textbf{segmento} $S_h$ de un flujo de trabajo es un conjunto de tareas que tienen la misma \emph{profundidad} $h$, es decir: 
+
+\begin{displaymath}
+S_h = \{ t \in T \mid H(t) = h \}
+\end{displaymath}
+
+\end{defn}
+
+En la figura \ref{fig:DAG_to_segment} se puede apreciar un ejemplo de la segmentación, en donde se puede ver que a cada tarea del flujo de trabajo se le asigna un segmento. Si ejecutarámos las tareas de ordenadas en segmentos ordenados por su profunidad $h$, podríamos asegurar que sólo es necesario verificar que las tareas del segmento $h - 1$ estén completas para ejecutar las tareas del segmento $h$; esto asegura que se respeten las restricciones de orden del flujo de trabajo.
 
 \begin{figure}
 \begin{center}
@@ -162,10 +173,10 @@ Así, este algoritmo se puede ver como un algoritmo de búsqueda exhaustiva. El 
 
 Por el momento, para hacer la relaci\'on entre configuraciones y tareas, se asume que cada tarea ocupa un núcleo de una máquina virtual y que todas las posibles configuraciones de máquinas virtuales del proveedor tienen memoria primaria suficiente para ejecutar las tareas.
 
-El algoritmo de asignación de recursos a tareas de un segmento está descrito en el pseudocódigo \ref{alg_blind_segment_schedule_exhaustive}. Como se puede notar en este pseudocódigo, hay dos funciones que son invocadas. La primera, llamada $\Call{take\_exhaustive}{}$, calcula de forma recursiva los costos óptimos de generar una asignación que utilice todos los núcleos de las configuraciones de las máquinas virtuales. La segunda funci\'on, llamada $\Call{check\_mappings}{}$, valida y reconstruye la soluci\'on \'optima que fue encontrada por el primer procedimiento.
+El algoritmo de asignación de recursos a tareas de un segmento está descrito en el pseudocódigo \ref{alg_blind_segment_schedule_exhaustive}. Como se puede notar en este pseudocódigo, hay dos funciones que son invocadas. La primera, llamada $\Call{take\_exhaustive}{}$, calcula de forma recursiva los costos óptimos de generar una asignación que utilice todos los núcleos de las configuraciones de las máquinas virtuales. La segunda funci\'on, llamada $\Call{checkMappings}{}$, valida y reconstruye la soluci\'on \'optima que fue encontrada por el primer procedimiento.
 
 \begin{algorithm}
-\caption{Asignación de configuraciones de recursos tareas de un segmento}
+\caption{Asignación de configuraciones de recursos a tareas de un segmento}
 \label{alg_blind_segment_schedule_exhaustive}
 \begin{algorithmic}[1]
 \Require{ 
@@ -202,7 +213,7 @@ Ahora, en los pseudocódigos \ref{alg_blind_take_exhaustive} y \ref{alg_blind_ch
 	\EndIf
 
 	\If{$t_i = |tasks|$}
-		\State{\Return{\Call{checkMapping}{}}}
+		\State{\Return{\Call{checkMappings}{coresUsed, resourceConfigs}}}
 	\EndIf
 
 	\State{\Call{pushEntry}{$t_i$, $rc_i$}}

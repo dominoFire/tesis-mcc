@@ -19,7 +19,7 @@ Sin embargo, aún no existe un consenso general sobre cuál es una definición c
 \section{Flujos de trabajo y el problema de planificación} 
 \label{secc:definitions}
 
-La \emph{planificación} es el proceso de asignación de recursos a tareas, de tal modo que se define un orden de ejecución de las tareas, teniendo lugar diferentes combinaciones de recursos y tareas. Primero se definirá de la forma más elemental el problema de la planificación para estudiar sus propiedades y con ello, explicar la relación de este problema fundamental con el problema de planificación de flujos de trabajo. Esto nos permitirá enunciar una propiedad importante del problema de planificación de flujos de trabajo, a saber: este problema pertenece a la clase de complejidad NP-completo.
+La \emph{planificación} es una regla de asignación de recursos a tareas, de tal modo que se define un orden de ejecución de las tareas, teniendo lugar diferentes combinaciones de recursos y tareas, respetando ciertas restricciones. Para estudiar este problema y sus propiedades, primero se definirá la forma elemental del problema de la planificación. Luego, se explicará la relación de este problema fundamental con el problema de planificación de flujos de trabajo. Esto nos permitirá enunciar una propiedad importante del problema de planificación de flujos de trabajo, a saber: este problema pertenece a la clase de complejidad NP-completo. Es decir, aún no se ha encontrado una solución con complejidad polinomial; además, verificar una solución de una instancia del problema de planificación tiene complejidad polinomial.
 
 
 \subsection{El problema fundamental de la planificación}
@@ -191,4 +191,8 @@ En todos los algoritmos antes descritos se asume que se conoce el tiempo de ejec
 
 Para mitigar este problema, se han hecho algoritmos basados en series de tiempo que estiman el tiempo de ejecución de cada una de las tareas de un flujo de trabajo. Estos algoritmos utilizan información histórica de ejecuciones de flujos de trabajo para realizar las predicciones  \cite{liu2011novel}. Otra propuesta para estimar el tiempo de ejecuci\'on es obtener la forma funcional del tiempo de ejecuci\'on en t\'erminos de la entrada de los programas \cite{coppa2012input}.
 
-El nuevo algoritmo que se propone en este trabajo toma ideas de los algoritmos de mejor esfuerzo.  Dependiendo de la funci\'on de costo parcial que se le otorgue, este algoritmo puede optimizar costo, tiempo o una combinaci\'on de ambos. La explicaci\'on detallada del algoritmo se presenta en el siguiente cap\'itulo.
+\section{Cómputo en la nube y planificación}
+
+Los algoritmos presentados en la taxonomía, también asumen que existe un conjunto fijo de recursos en donde se tienen que ejecutar las tareas. Sin embargo, en el paradigma del cómputo en la nube, la candidad de recursos para ejecutar tareas es flexible, con un costo de utilización proporcional a la cantidad de recursos. Este hecho agrega una nueva posibilidad para el problema de planificación de flujos de trabajo: no sólo se requiere optimizar las tareas para ejecutarlas en el menor tiempo posible, también es deseable optimizar el costo de ejecución de las tareas en los recursos.
+
+El nuevo algoritmo propuesto en este trabajo toma en cuenta la flexibilidad de los recursos del paradigma del cómputo en la nube y las ideas de los algoritmos de mejor esfuerzo. Dependiendo de la función de costo parcial que se le otorgue, este algoritmo puede optimizar costo de ejecución, tiempo o una combinación de ambos objetivos. La explicación detallada del algoritmo se presenta en el siguiente capítulo.

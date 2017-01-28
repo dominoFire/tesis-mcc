@@ -28,7 +28,7 @@ Configuraci\'on & Cores & $fv$ & Costo/Hr \\
 \label{table:resource_configurations}
 \end{table}
 
-Para evaluar el desempeño de los algoritmos de planificación, se tomaron las planificaciones que arrojaba cada algoritmo y con ellas, se calculó tanto el tiempo total de ejecuci\'on como el costo total de ejecución. El costo de ejecución es definido como el producto entre (1) el costo por hora de las máquinas virtuales utilizadas y (2) el número de horas utilizadas de cada máquina, es decir, la diferencia entre el tiempo final de la última tarea a ejecutar por la máquina y el tiempo inicial de la primera tarea a ejecutar.
+Para evaluar el desempeño de los algoritmos de planificación, se tomaron las planificaciones que arrojaba cada algoritmo y con ellas, se calculó tanto el tiempo total de ejecución como el costo total de ejecución. El costo de ejecución es definido como el producto entre (1) el costo por hora de las máquinas virtuales utilizadas y (2) el número de horas utilizadas de cada máquina, es decir, la diferencia entre el tiempo final de la última tarea a ejecutar por la máquina y el tiempo inicial de la primera tarea a ejecutar.
 
 En las tablas \ref{table:results_makespan} y \ref{table:results_cost}, se pueden ver los resultados de las ejecuciones. Sorprendentemente, los resultados variando la funci\'on de costo parcial son muy parecidos. Esto puede explicarse a que ambas funciones comparten el componente $\frac{f_c}{f_v}$, donde $f_c$ es el factor de complejidad de la tarea y $f_v$ es el factor de velocidad del recurso. Además, la optimización de segmentos que realiza el algoritmo ciego, está basada en un algoritmo de búsqueda en profundidad, lo cual hace que ambas funciones similares obtengan resultados similares, ya que estas funciones de costo parcial obtienen costos proporcionales.
 
@@ -71,7 +71,7 @@ Algoritmo & Makespan & Varianza & Costo & Varianza \\
 \end{table}
 
 
-Analizando los resultados de las tablas anteriores, el algoritmo ciego tiene makespans promedios bastante altos comparados con los otros tres algoritmos. Sin embargo, el algoritmo ciego obtiene mejores costos de ejecución en comparación al algoritmo ciego. Por otro lado, el algoritmo ciego calculó el número de núcleos y máquinas virtuales que pueden maximizar el paralelismo de las tareas; los algoritmos MaxMin, MinMin y Miope necesitan que los recursos ya estén creados (determinados \emph{a priori}) para poder generar planificaciones. Finalmente, en  las figuras \ref{fig:avg_blind_makespan} y \ref{fig:avg_blind_cost} se pueden comparar las gráficas del costo y el makespan promedio generado en las configuraciones para optimizar makespan y costo, respectivamente.
+Analizando los resultados de las tablas anteriores, el algoritmo ciego tiene makespans promedios bastante altos comparados con los otros tres algoritmos. Sin embargo, el algoritmo ciego obtiene mejores costos de ejecución en comparación al algoritmo Miope. Por otro lado, el algoritmo ciego calculó el número de núcleos y máquinas virtuales que pueden maximizar el paralelismo de las tareas; los algoritmos MaxMin, MinMin y Miope necesitan que los recursos ya estén creados (determinados \emph{a priori}) para poder generar planificaciones. Finalmente, en  las figuras \ref{fig:avg_blind_makespan} y \ref{fig:avg_blind_cost} se pueden comparar las gráficas del costo y el makespan promedio generado en las configuraciones para optimizar makespan y costo, respectivamente.
 
 
 \begin{figure}

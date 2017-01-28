@@ -27,7 +27,7 @@ Desarrollar un sistema de administración de flujos de trabajo conlleva varias d
 
 \subsection{El flujo como centro de la aplicación}
 
-Los sistemas de cómputo distribuido tienen una complexidad inherente que crece más conforme mayores capacidades de agregan a éstos. Los científicos y personas especialistas de algún dominio de conocimiento cada vez tienen menos tiempo para aprender los detalles del funcionamiento de estos sistemas distribuidos. Por otro lado, dibujar diagramas que describan la secuencia de ejecución de los programas es más intuitivo. Y un flujo de trabajo bien puede expresarse a través de estos diagramas. De esta forma, especificar el flujo de trabajo es el pilar que describe los procesos a ejecutar. Por otro lado, el flujo de trabajo aporta información que ayuda a la paralelización y ejecución distribuida del mismo.
+Los sistemas de cómputo distribuido tienen una complejidad inherente que crece más conforme mayores capacidades de agregan a éstos. Los científicos y personas especialistas de algún dominio de conocimiento cada vez tienen menos tiempo para aprender los detalles del funcionamiento de estos sistemas distribuidos. Por otro lado, dibujar diagramas que describan la secuencia de ejecución de los programas es más intuitivo. Y un flujo de trabajo bien puede expresarse a través de estos diagramas. De esta forma, especificar el flujo de trabajo es el pilar que describe los procesos a ejecutar. Por otro lado, el flujo de trabajo aporta información que ayuda a la paralelización y ejecución distribuida del mismo.
 
 
 
@@ -38,7 +38,7 @@ En plataformas de c\'omputo en la nube es posible ejecutar cualquier software qu
 \begin{enumerate}
 \item Es más difícil supervisar estos entornos debido a que no se puede acceder a la infraestrucutra fisicamente. Es decir, se tiene que monitorear el cluster desde una red cuya latencia es mayor a la de una red local. 
 
-\item hay un costo monetario por utilizar estos recursos que está explícitamente establecido, el cual es deseable minimizar. 
+\item Hay un costo monetario por utilizar estos recursos que está explícitamente establecido, el cual es deseable minimizar. 
 \end{enumerate}
 
 Por otra parte, la unidad b\'asica de procesamiento en los entornos de c\'omputo en la nube, la m\'aquina virtual, a final de cuentas es una pieza de hardware que es configurada, encendida y apagada por software. Entonces, es posible hacer software que administre estas m\'aquinas virtuales, ya sea minimizando el costo de ejecuci\'on o acelerando la obtenci\'on de resultados. Adem\'as, trasladar el esfuerzo de configuraci\'on de las m\'aquinas virtuales hacia un programa especializado conlleva a la automatizaci\'on, dando m\'as tiempo a los usuarios finales para enfocarse en los problemas que est\'an resolviendo con estos c\'alculos. Por estas razones, el sistema administrador de flujos de trabajo tiene que estar fuertemente orientado a trabajar en la nube.
@@ -80,7 +80,7 @@ Para lograr el objetivo antes planteado, se realizaron estos pasos:
 
 \begin{enumerate}
 \item Revisi\'on del estado del arte de algoritmos de planificaci\'on. En todos los sistemas administradores de flujos de trabajo, uno de lo componentes principales es el planificador de recursos, compuesto principalmente por el algoritmo de planificaci\'on. La revisi\'on de los algoritmos disponibles sirvi\'o de base para formular el algoritmo de planificaci\'on para entornos de c\'omputo en la nube.
-\item Formulaci\'on de la interfaz de descripcion de flujos de trabajo. Varios sistemas administradores proveen interfaces gr\'aficas para crear flujos de trabajo como Kepler \cite{altintas2016kepler}. Para simplificar el desarrollo del prototipo, se decidi\'o usar archivos YAML con una estructura predeterminada para describir un flujo de trabajo.
+\item Formulación de la interfaz de descripción de flujos de trabajo. Varios sistemas administradores proveen interfaces gr\'aficas para crear flujos de trabajo como Kepler \cite{altintas2016kepler}. Para simplificar el desarrollo del prototipo, se decidi\'o usar archivos YAML con una estructura predeterminada para describir un flujo de trabajo.
 \item Desarrollo del algoritmo de planificaci\'on para c\'omputo en la nube. A la par del desarrollo del prototipo, se formul\'o el algoritmo de planificaci\'on. La premisa base de este algoritmo es que pueda optimizar tanto costo como tiempo de ejecuci\'on. Sin embargo, se puso \'enfasis en la optimizaci\'on de costo, porque se contaba con una cantidad limitada de presupuesto para ejecutar flujos de trabajo en la nube. 
 \item Pruebas experimentales. Se generaron flujos de trabajo para probar el prototipo. Cabe aclarar que el nuevo algoritmo de planificaci\'on fue probado con simulaciones.
 \end{enumerate}

@@ -1,9 +1,9 @@
 \chapter[Sweeper]{Sweeper: ejecución de flujos de trabajo en cómputo en la nube}
 \label{chap:sweeper}
 
-En este capítulo se describen los detalles del funcionamiento de Sweeper \cite{dominofire2015sweeper}, el sistema de administración de flujos de trabajo orientado a cómputo en la nube. Utilizando este paquete, se pueden ejecutar tareas expresadas como comandos de una terminal Linux, con dependencias de orden entre estas tareas, ejecutadas remotamente en m\'aquinas virtuales en la nube. Sweeper está desarrollado en el lenguaje de programación Python \cite{python3}.
+En este capítulo se describen los detalles del funcionamiento de Sweeper \cite{dominofire2015sweeper}, el sistema de administración de flujos de trabajo orientado a cómputo en la nube. Utilizando este software, se pueden ejecutar tareas expresadas como comandos de una terminal Linux, con dependencias de orden entre estas tareas, ejecutadas remotamente en m\'aquinas virtuales en la nube. Sweeper está desarrollado en el lenguaje de programación Python \cite{python3}.
 
-Para ejecutar flujos de trabajo con Sweeper, se especifican las tareas del flujo de trabajo y sus dependencias. Sweeper lee este archivo de descripción y enseguida estima los tiempos de ejecución de las tareas y elige la mejor asignación de máquinas virtuales y tareas del flujo de trabajo que optimicen los criterios dados.
+Para ejecutar flujos de trabajo con Sweeper, se especifican las tareas del flujo de trabajo y sus dependencias. Sweeper lee este archivo de descripción y enseguida estima los tiempos de ejecución de las tareas y elige la mejor asignación de máquinas virtuales y tareas del flujo de trabajo que optimicen los criterios dados. En Sweeper está implementado parte del algoritmo ciego para estimar el número necesario de máquinas virtuales para ejecutar el flujo de trabajo.
 
 Para crear un flujo de trabajo, se crea un archivo que cumpla con el formato YAML \cite{dot2015yaml} llamado \texttt{workflow.yaml}. De esta forma, en la sección \texttt{workflow}, se definen, en forma de lista, las tareas que conforman el flujo de trabajo. En el código \ref{code:workflow_example} se puede apreciar la estructura del archivo del flujo de trabajo.  
 
@@ -48,7 +48,7 @@ En el ejemplo anterior se pueden apreciar los elementos básicos que componen un
 \item{\texttt{include\_files}: Lista de los archivos que deben ser subidos al cluster antes de que la tarea sea ejecutada.}
 \end{itemize}
 
-Una característica importante de Sweeper que lo hace único a otros sistemas de administración de flujos de trabajo, es la expansión de parámetros. El usuario puede especificar una tarea que se requiera ejecutar con un conjunto predefinido de argumentos. Sweeper calcula todas las combinaciones posibles de parámetros y automáticamente crea una tarea a ejecutarse por cada posible combinaci\'on de parámetros. Esto es de gran utilidad para la ejecución de experimentos y para la ejecución de aplicaciones de barrido de parámetros. Así, en el listado del código \ref{code:forests_2} se muestra un flujo de trabajo que utliza listas de parámetros de donde se generan las combinaciones de argumentos. En la figura \ref{fig:workflow_forests} se encuentra la representación gr\'afica de este flujo de trabajo.
+Una característica importante de Sweeper que lo hace único a otros sistemas de administración de flujos de trabajo, es la expansión de parámetros. El usuario puede especificar una tarea que se requiera ejecutar con un conjunto predefinido de argumentos. Sweeper calcula todas las combinaciones posibles de parámetros y automáticamente crea una tarea a ejecutarse por cada posible combinaci\'on de parámetros. Esto es de gran utilidad para la ejecución de experimentos y para la ejecución de aplicaciones de barrido de parámetros. Así, en el listado del código \ref{code:forests_2} se muestra un flujo de trabajo que utiliza listas de parámetros de donde se generan las combinaciones de argumentos. En la figura \ref{fig:workflow_forests} se encuentra la representación gr\'afica de este flujo de trabajo.
 
 \begin{figure}
 \begin{center}
