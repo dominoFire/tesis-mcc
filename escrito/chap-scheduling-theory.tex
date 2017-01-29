@@ -83,7 +83,7 @@ Para cada criterio $c_i \in C$, existe una \textbf{función de costo parcial} $\
 \noindent Las funciones de costo parcial son útiles para determinar costos a nivel de tareas; es decir, con una función de costo parcial podemos definir el tiempo que tomará ejecutar una tarea en un recurso determinado o el costo monetario de ejecutar la tarea en dicho recurso.
 
 \begin{defn}
-Para cada criterio $c_i \in C$, existe una \textbf{función de costo total} $\Delta_i : \mathcal{W} \times \mathcal{F} \mapsto \mathbb{R}$, que asigna a un flujo de trabajo $w$ planificado por $f$ un costo basado en los costos parciales determinados por los servicios utlizados para ejecutar las tareas del flujo.
+Para cada criterio $c_i \in C$, existe una \textbf{función de costo total} $\Delta_i : \mathcal{W} \times \mathcal{F} \mapsto \mathbb{R}$, que asigna a un flujo de trabajo $w$ planificado por $f$ un costo basado en los costos parciales determinados por los servicios utilizados para ejecutar las tareas del flujo.
 \end{defn}
 
 \noindent Por lo tanto, el objetivo del problema de la planificación de flujos de trabajo es encontrar la planificación $f$ que minimice las funciones de costo total $\Delta_i$, $1 \le i \le n$.
@@ -126,7 +126,7 @@ De acuerdo a Yu et al. \cite{yu2008workflow}, se pueden clasificar los algoritmo
 
 \subsection{Algoritmos de mejor esfuerzo}
 %o \emph{makespan}
-Estos algoritmos tratan de minimizar algún criterio, que en muchos casos es el tiempo total de ejecución. Cabe aclarar que para los siguientes algoritmos, se asumirá que el grafo del flujo de trabajo tiene una correspondencia biyectiva entre los nodos $\mathcal{V}$ y las tareas $\mathcal{T}$, es decir, cada nodo del grafo representa una tarea del flujo de trabajo. Las aristas del grafo representan \emph{dependencias entre tareas}.
+Estos algoritmos tratan de minimizar algún criterio, que en muchos casos es el tiempo total de ejecución. Cabe aclarar que, para los siguientes algoritmos, se asumirá que el grafo del flujo de trabajo tiene una correspondencia biyectiva entre los nodos $\mathcal{V}$ y las tareas $\mathcal{T}$, es decir, cada nodo del grafo representa una tarea del flujo de trabajo. Las aristas del grafo representan \emph{dependencias entre tareas}.
 
 También, los algoritmos de mejor esfuerzo se pueden dividir en algoritmos guiados por heurísticas y en algoritmos guiados por metaheurísticas. El primer subgrupo debe su nombre a que las soluciones están basadas en ideas que resuelven de manera aproximada el problema de la planificación bajo ciertas condiciones \cite{yu2008workflow}. El segundo subgrupo contiene a los algoritmos que utilizan algún método para elegir o generar planificaciones que se acerquen a un nivel óptimo establecido.
 
@@ -193,6 +193,6 @@ Para mitigar este problema, se han hecho algoritmos basados en series de tiempo 
 
 \section{Cómputo en la nube y planificación}
 
-Los algoritmos presentados en la taxonomía, también asumen que existe un conjunto fijo de recursos en donde se tienen que ejecutar las tareas. Sin embargo, en el paradigma del cómputo en la nube, la candidad de recursos para ejecutar tareas es flexible, con un costo de utilización proporcional a la cantidad de recursos. Este hecho agrega una nueva posibilidad para el problema de planificación de flujos de trabajo: no sólo se requiere optimizar las tareas para ejecutarlas en el menor tiempo posible, también es deseable optimizar el costo de ejecución de las tareas en los recursos.
+Los algoritmos presentados en la taxonomía, también asumen que existe un conjunto fijo de recursos en donde se tienen que ejecutar las tareas. Sin embargo, en el paradigma del cómputo en la nube, la cantidad de recursos para ejecutar tareas es flexible, con un costo de utilización proporcional a la cantidad de recursos. Este hecho agrega una nueva posibilidad para el problema de planificación de flujos de trabajo: no sólo se requiere optimizar las tareas para ejecutarlas en el menor tiempo posible, también es deseable optimizar el costo de ejecución de las tareas en los recursos.
 
 El nuevo algoritmo propuesto en este trabajo toma en cuenta la flexibilidad de los recursos del paradigma del cómputo en la nube y las ideas de los algoritmos de mejor esfuerzo. Dependiendo de la función de costo parcial que se le otorgue, este algoritmo puede optimizar costo de ejecución, tiempo o una combinación de ambos objetivos. La explicación detallada del algoritmo se presenta en el siguiente capítulo.

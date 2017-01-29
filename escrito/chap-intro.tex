@@ -3,13 +3,13 @@
 
 \section{Antecedentes}
 
-El mundo digital dominado por datos requiere la utilización de algoritmos, tecnologías y mecanismos que permitan orquestar procesamientos de grandes volúmenes de datos, los cuales pueden tardar horas e, incluso, días en completarse. Aún así, el diseño de la aplicación junto con el flujo de trabajo que modela las tareas llevadas a cabo por la aplicación, requiere un esfuerzo considerable.
+El mundo digital dominado por datos requiere la utilización de algoritmos, tecnologías y mecanismos que permitan orquestar procesamientos de grandes volúmenes de datos, los cuales pueden tardar horas e, incluso, días en completarse. Aun así, el diseño de la aplicación junto con el flujo de trabajo que modela las tareas llevadas a cabo por la aplicación, requiere un esfuerzo considerable.
 
-Ahora bien, sería deseable desarrollar una plataforma que permita distribuir estos flujos de trabajo computacionalmente intensivos en un sistema distribuído con el fin de disminuir el tiempo de ejecución del flujo. También, es deseable disminuir el presupuesto utilizado, ya que en la actualidad, es muy común utilizar servicios de cómputo en la nube, en el cual se paga de acuerdo a un modelo económico sujeto al consumo de los recursos computacionales.
+Ahora bien, sería deseable desarrollar una plataforma que permita distribuir estos flujos de trabajo computacionalmente intensivos en un sistema distribuido con el fin de disminuir el tiempo de ejecución del flujo. También, es deseable disminuir el presupuesto utilizado ya que, en la actualidad, es muy común utilizar servicios de cómputo en la nube, en el cual se paga de acuerdo a un modelo económico sujeto al consumo de los recursos computacionales.
 
 En este trabajo se presenta el desarrollo de esta plataforma de ejecución de flujos de trabajo intensivo en datos con aplicación en cómputo en la nube. También se presenta el marco teórico necesario para el desarrollo de este proyecto.
 
-Primero, se describe el modelo de costos de cómputo en la nube, marcado por acuerdos de nivel de servicio, y posteriormente se describe un mecanismo para poder estimar el tiempo de ejecución del flujo de trabajo, necesario para calcular el prespuesto requerido para ejecutar el flujo de trabajo. 
+Primero, se describe el modelo de costos de cómputo en la nube, marcado por acuerdos de nivel de servicio, y posteriormente se describe un mecanismo para poder estimar el tiempo de ejecución del flujo de trabajo, necesario para calcular el presupuesto requerido para ejecutar el flujo de trabajo. 
 
 % Luego, describiremos cómo hacer benchmarking dentro de plataformas de cómputo en la nube. Se sugiere utilizar el benchmark proporcionado por LINPACK, ya que éste puede aproximar el rendimiento de un sólo núcleo y varios núcleos. En la tesis de XXX et al. se puede mostrar. Luego describiremos el algoritmo de planificación de flujos de trabajo. Luego describiremos el mecanismo para poner las tareas en de. Luego, compararemos con soluciones existentes como Aneka, HTCondor y Pegasus.
 
@@ -33,10 +33,10 @@ Los sistemas de cómputo distribuido tienen una complejidad inherente que crece 
 
 \subsection{Orientado a nubes}
 
-En plataformas de c\'omputo en la nube es posible ejecutar cualquier software que se pueda ejecutar en una computadora personal convencional. Esto incluye software administradores de procesos como Open Grid Scheduler \cite{univa2016gridengine}, HTCondor \cite{htcondor2014webpage}; programas escritos con primitivas MPI \cite{mpiforum2016mpi}, aplicaciones basadas en el paradigma MapReduce \cite{dean2008mapreduce} y programas descritos como grafos utilizando el marco de trabajo GraphLab \cite{low2014graphlab}. Estos programas antes mencionados funcionan muy bien en entornos de una sola computadora con gran capacidad o en grids institucionales. Sin embargo, cuando se utilizan estos programas en enfoques como la nube, surgen algunas eventualidades, a saber:
+En plataformas de c\'omputo en la nube es posible ejecutar cualquier software que se pueda ejecutar en una computadora personal convencional. Esto incluye software administrador de procesos como Open Grid Scheduler \cite{univa2016gridengine}, HTCondor \cite{htcondor2014webpage}; programas escritos con primitivas MPI \cite{mpiforum2016mpi}, aplicaciones basadas en el paradigma MapReduce \cite{dean2008mapreduce} y programas descritos como grafos utilizando el marco de trabajo GraphLab \cite{low2014graphlab}. Estos programas antes mencionados funcionan muy bien en entornos de una sola computadora con gran capacidad o en grids institucionales. Sin embargo, cuando se utilizan estos programas en enfoques como la nube, surgen algunas eventualidades, a saber:
 
 \begin{enumerate}
-\item Es más difícil supervisar estos entornos debido a que no se puede acceder a la infraestrucutra fisicamente. Es decir, se tiene que monitorear el cluster desde una red cuya latencia es mayor a la de una red local. 
+\item Es más difícil supervisar estos entornos debido a que no se puede acceder a la infraestructura físicamente. Es decir, se tiene que monitorear el despliegue desde una red cuya latencia es mayor a la de una red local. 
 
 \item Hay un costo monetario por utilizar estos recursos que está explícitamente establecido, el cual es deseable minimizar. 
 \end{enumerate}
@@ -46,12 +46,12 @@ Por otra parte, la unidad b\'asica de procesamiento en los entornos de c\'omputo
 
 \subsection{Intensivo en datos}
 
-Como se ha dicho en la introducción, las cargas de trabajo que administran estos sistemas usualmente generan enormes cantidades de datos, que van desde logs de operación, archivos intermedios de resultados hasta volcados de memoria en caso de que ocurra algún error. Así, manejar datos es primordial en nuestra solucíón. Este requerimiento se puede cumplir utilizando sistemas de archivos distribuidos con énfasis en la tasa de rendimiento de datos guardados.
+Como se ha dicho en la introducción, las cargas de trabajo que administran estos sistemas usualmente generan enormes cantidades de datos, que van desde logs de operación, archivos intermedios de resultados hasta volcados de memoria en caso de que ocurra algún error. Así, manejar datos es primordial en nuestra solución. Este requerimiento se puede cumplir utilizando sistemas de archivos distribuidos con énfasis en la tasa de rendimiento de datos guardados.
 
 
 \subsection{Portable entre nubes}
 
-El hecho de tener la característica de ser portable entre nubes permite la flexibilidad de escoger la plataforma de cómputo en la nube conveniente a las necesidades de ejecución del flujo de trabajo. Así, es deseable poder escoger ejecutar el flujo de trabajo en Amazon Web Servies \cite{amazon2016aws}, Rackspace \cite{racksapce2016managedcloud} o Microsoft Azure \cite{microsoft2015azure} (por citar algunos ejemplos), dependiendo de la infraestructura necesaria o prespuesto asignado.
+El hecho de tener la característica de ser portable entre nubes permite la flexibilidad de escoger la plataforma de cómputo en la nube conveniente a las necesidades de ejecución del flujo de trabajo. Así, es deseable poder escoger ejecutar el flujo de trabajo en Amazon Web Services \cite{amazon2016aws}, Rackspace \cite{racksapce2016managedcloud} o Microsoft Azure \cite{microsoft2015azure} (por citar algunos ejemplos), dependiendo de la infraestructura necesaria o presupuesto asignado.
 %Aunque dudo que este requerimiento pueda cumplirse, debido a las abstracciones necesarias que deben hacerse en el software
 
 
@@ -67,7 +67,7 @@ Utilizar estándares hace que 1) la curva de aprendizaje para utilizar sistemas 
 
 \section{Objetivo}
 
-Construir un sistema administrador de flujos de trabajo que esté orientado a utilizar el enfoque de cómputo en la nube, con la capacidad de calcular el n\'umero de recursos necesarios para que las tareas no tengan que esperar por la disponibilidad de un recursos.
+Construir un sistema administrador de flujos de trabajo que esté orientado a utilizar el enfoque de cómputo en la nube, con la capacidad de calcular el n\'umero de recursos necesarios para que las tareas no tengan que esperar por la disponibilidad de algún recurso.
 
 \section{Alcance}
 
@@ -79,7 +79,7 @@ En este trabajo, se realiz\'o un prototipo del sistema administrador de flujos d
 Para lograr el objetivo antes planteado, se realizaron estos pasos:
 
 \begin{enumerate}
-\item Revisi\'on del estado del arte de algoritmos de planificaci\'on. En todos los sistemas administradores de flujos de trabajo, uno de lo componentes principales es el planificador de recursos, compuesto principalmente por el algoritmo de planificaci\'on. La revisi\'on de los algoritmos disponibles sirvi\'o de base para formular el algoritmo de planificaci\'on para entornos de c\'omputo en la nube.
+\item Revisi\'on del estado del arte de algoritmos de planificaci\'on. En todos los sistemas administradores de flujos de trabajo, uno de los componentes principales es el planificador de recursos, compuesto principalmente por el algoritmo de planificaci\'on. La revisi\'on de los algoritmos disponibles sirvi\'o de base para formular el algoritmo de planificaci\'on para entornos de c\'omputo en la nube.
 \item Formulación de la interfaz de descripción de flujos de trabajo. Varios sistemas administradores proveen interfaces gr\'aficas para crear flujos de trabajo como Kepler \cite{altintas2016kepler}. Para simplificar el desarrollo del prototipo, se decidi\'o usar archivos YAML con una estructura predeterminada para describir un flujo de trabajo. Con ello, se deja abierta la posibilidad de construir una interfaz gráfica de usuario para diseñar los flujos de trabajo.
 \item Desarrollo del algoritmo de planificaci\'on para c\'omputo en la nube. A la par del desarrollo del prototipo, se formul\'o el algoritmo de planificaci\'on. La premisa base de este algoritmo es que pueda optimizar tanto costo como tiempo de ejecuci\'on. Sin embargo, se puso \'enfasis en la optimizaci\'on de costo, porque se contaba con una cantidad limitada de presupuesto para ejecutar flujos de trabajo en la nube. 
 \item Pruebas experimentales. Se generaron flujos de trabajo para probar el prototipo. También, el nuevo algoritmo de planificaci\'on fue probado con flujos de trabajo generados con simulaciones.
@@ -87,4 +87,4 @@ Para lograr el objetivo antes planteado, se realizaron estos pasos:
 
 \section{Organización del documento}
 
-En el capítulo \ref{chap:scheduling_teory}, se revisa la teoría de planificación necesaria para construir un algoritmo acorde al objetivo planteado. Luego, en el capítulo \ref{chap:algorithm} se describe el algoritmo para planificar tareas de un flujo de trabajo en entornos de cómputo en la nube, que es la parte esencial para optimizar la ejecución de los flujos de trabajo. Además, en el capítulo \ref{chap:sweeper} se describe la arquitectura y funcionamiento de Sweeper, el sistema administrador de flujos de trabajo desarrollado en esta tesis. En el cap\'itulo \ref{chap:results} se muestran los resultados de comparaci\'on del algoritmo propuesto respecto a otros algorimos conocidos de planificaci\'on de flujos de trabajo. Finalmente, en el capítulo \ref{chap:conclusions} se presentan conclusiones.
+En el capítulo \ref{chap:scheduling_teory}, se revisa la teoría de planificación necesaria para construir un algoritmo acorde al objetivo planteado. Luego, en el capítulo \ref{chap:algorithm} se describe el algoritmo para planificar tareas de un flujo de trabajo en entornos de cómputo en la nube, que es la parte esencial para optimizar la ejecución de los flujos de trabajo. Además, en el capítulo \ref{chap:sweeper} se describe la arquitectura y funcionamiento de Sweeper, el sistema administrador de flujos de trabajo desarrollado en esta tesis. En el cap\'itulo \ref{chap:results} se muestran los resultados de comparaci\'on del algoritmo propuesto respecto a otros algoritmos conocidos de planificaci\'on de flujos de trabajo. Finalmente, en el capítulo \ref{chap:conclusions} se presentan conclusiones.

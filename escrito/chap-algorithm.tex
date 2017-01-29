@@ -28,7 +28,7 @@ Un área de investigación activa es la planificación de tareas a nivel de proc
 % puedes averiguar el numero maximo de maquinas a levantar con el modelo de tareas paralelar
 % simplemente cuentas el segmento con el mayor numero de paralelizaciones
 
-Es muy común que los servicios de cómputo en la nube se pague la utilización de las máquinas virtuales por hora, dejando sin cobrar porciones de hora no utlizadas. Además, se pueden solicitar tantos recursos como se requieran, limitándose solamente al presupuesto disponible. Tambi\'en, estas máquinas virtuales son recursos variados; pueden ser desde máquinas con un solo procesador, hasta m\'aquinas virtuales con grandes cantidades de memoria y m\'ultiples procesadores.
+Es muy común que los servicios de cómputo en la nube se pague la utilización de las máquinas virtuales por hora, dejando sin cobrar porciones de hora no utilizadas. Además, se pueden solicitar tantos recursos como se requieran, limitándose solamente al presupuesto disponible. Tambi\'en, estas máquinas virtuales son recursos variados; pueden ser desde máquinas con un solo procesador, hasta m\'aquinas virtuales con grandes cantidades de memoria y m\'ultiples procesadores.
 
 De acuerdo al primer cap\'itulo del libro de Pinedo \cite{pinedo2012scheduling} hay esfuerzos para clasificar los problemas de planificación en general. Sin embargo, la clasificación presentada en este trabajo sólo contempla los problemas que optimizan una sola métrica, aunque, se puede utilizar una combinación de funciones objetivo a optimizar. Sin embargo, esta forma de atacar el problema de planificación multiobjetivo no garantiza evaluar todas las posibles opciones. 
 
@@ -74,7 +74,7 @@ H(x) = \left\{
 \noindent Donde $\text{Padres}(t)$ es el conjunto de tareas que inmediatamente preceden a la tarea $t$, es decir, aquellas tareas $u$ que tienen una dependencia de orden que va a la tarea $t$.
 \end{defn}
 
-La profundidad $H$ es definida recursivamente sobre las depdendencias que tiene cada tarea en un flujo de trabajo. Las tareas que no tienen dependencias (o padres), tendrán profundidad $H = 1$; mientras que las tareas que tengan dependencias, tendrán profundidad igual a la profundidad más alta de alguna de sus dependencias sumada en 1. Este último sumando representa, por definición, la profundidad que tiene cada una de las tareas del flujo de trabajo sin importar sus dependencias. Por lo tanto, las tareas siempre tendrán profundidades $H$ diferentes a las profunidades $H'$ de sus padres (o dependencias). Así, se puede definir los segmentos de un flujo de trabajo de la siguiente forma:
+La profundidad $H$ es definida recursivamente sobre las depdendencias que tiene cada tarea en un flujo de trabajo. Las tareas que no tienen dependencias (o padres), tendrán profundidad $H = 1$; mientras que las tareas que tengan dependencias, tendrán profundidad igual a la profundidad más alta de alguna de sus dependencias sumada en 1. Este último sumando representa, por definición, la profundidad que tiene cada una de las tareas del flujo de trabajo sin importar sus dependencias. Por lo tanto, las tareas siempre tendrán profundidades $H$ diferentes a las profundidades $H'$ de sus padres (o dependencias). Así, se puede definir los segmentos de un flujo de trabajo de la siguiente forma:
 
 \begin{defn}
 Un \textbf{segmento} $S_h$ de un flujo de trabajo es un conjunto de tareas que tienen la misma \emph{profundidad} $h$, es decir: 
@@ -85,7 +85,7 @@ S_h = \{ t \in T \mid H(t) = h \}
 
 \end{defn}
 
-En la figura \ref{fig:DAG_to_segment} se puede apreciar un ejemplo de la segmentación, en donde se puede ver que a cada tarea del flujo de trabajo se le asigna un segmento. Si ejecutarámos las tareas de ordenadas en segmentos ordenados por su profunidad $h$, podríamos asegurar que sólo es necesario verificar que las tareas del segmento $h - 1$ estén completas para ejecutar las tareas del segmento $h$; esto asegura que se respeten las restricciones de orden del flujo de trabajo.
+En la figura \ref{fig:DAG_to_segment} se puede apreciar un ejemplo de la segmentación, en donde se puede ver que a cada tarea del flujo de trabajo se le asigna un segmento. Si ejecutáramos las tareas de ordenadas en segmentos ordenados por su profundidad $h$, podríamos asegurar que sólo es necesario verificar que las tareas del segmento $h - 1$ estén completas para ejecutar las tareas del segmento $h$; esto asegura que se respeten las restricciones de orden del flujo de trabajo.
 
 \begin{figure}
 \begin{center}
@@ -169,7 +169,7 @@ Ahora, el cómputo en la nube abre otras posibilidades que no se pueden realizar
 
 %Así, este algoritmo se puede ver como el algoritmo de la mochila \emph{inverso} con múltiples mochilas, en donde las mochilas son las posibles configuraciones y las tareas son objetos que deben ser \emph{embolsados}. 
 
-Así, este algoritmo se puede ver como un algoritmo de búsqueda exhaustiva. El objetivo de este algoritmo es encontrar aquella asignación que pueda asignar todas las tareas maximizando el uso de los núcleos de las posibles configuraciones de la máquinas virtuales, sujeto a una condición de optimalidad. Para este caso, la condición de optimalidad es definida a trav\'es de una funci\'on de costo parcial, especificada por el usuario. 
+Así, este algoritmo se puede ver como un algoritmo de búsqueda exhaustiva. El objetivo de este algoritmo es encontrar aquella asignación que pueda asignar todas las tareas maximizando el uso de los núcleos de las posibles configuraciones de las máquinas virtuales, sujeto a una condición de optimalidad. Para este caso, la condición de optimalidad es definida a trav\'es de una funci\'on de costo parcial, especificada por el usuario. 
 
 Por el momento, para hacer la relaci\'on entre configuraciones y tareas, se asume que cada tarea ocupa un núcleo de una máquina virtual y que todas las posibles configuraciones de máquinas virtuales del proveedor tienen memoria primaria suficiente para ejecutar las tareas.
 
@@ -189,7 +189,7 @@ Los siguientes parámetros:
 \Ensure{Una lista de asignaciones de tarea -- recurso}
 
 \Procedure{$bin\_packing\_exhaustive$}{$tasks$, $resource\_configs$}
-	\State $coresUsed \gets$ Arreglo de tamaño $|resource\_configs|$, incializado con 0
+	\State $coresUsed \gets$ Arreglo de tamaño $|resource\_configs|$, inicializado con 0
 	\State $currentMappings \gets$ Lista vacía	
 	\State \Call{take\_exhaustive}{0, 0}
 	\State \Return $currentMappings$
@@ -198,7 +198,7 @@ Los siguientes parámetros:
 \end{algorithm}
 
 
-Ahora, en los pseudocódigos \ref{alg_blind_take_exhaustive} y \ref{alg_blind_check_mappings}, se muestran los procedimentos principales para generar la asignación de configuraciones de recursos a las tareas de un segmento de un flujo de trabajo. El procedimiento del pseudocódigo \ref{alg_blind_take_exhaustive} calcula recursivamente el costo de la asignación óptima, de acuerdo a la funci\'on de costo definida por el usuario. El procedimiento del pseudoc\'odigo \ref{alg_blind_check_mappings} verifica que la solución encontrada por el primer procedimiento sea una solución válida. Además, conserva la mejor solución encontrada. Es decir, conserva la mejor lista de asignaciones tarea - configuración de recursos encontrada.
+Ahora, en los pseudocódigos \ref{alg_blind_take_exhaustive} y \ref{alg_blind_check_mappings}, se muestran los procedimientos principales para generar la asignación de configuraciones de recursos a las tareas de un segmento de un flujo de trabajo. El procedimiento del pseudocódigo \ref{alg_blind_take_exhaustive} calcula recursivamente el costo de la asignación óptima, de acuerdo a la funci\'on de costo definida por el usuario. El procedimiento del pseudoc\'odigo \ref{alg_blind_check_mappings} verifica que la solución encontrada por el primer procedimiento sea una solución válida. Además, conserva la mejor solución encontrada. Es decir, conserva la mejor lista de asignaciones tarea - configuración de recursos encontrada.
 
 
 \begin{algorithm}
@@ -268,7 +268,7 @@ Ahora, en los pseudocódigos \ref{alg_blind_take_exhaustive} y \ref{alg_blind_ch
 
 \subsubsection{Combinación de planificaciones de segmentos}
 
-Ahora bien, si el tiempo requerido para invocar máquinas virtuales fuera cero y las transferencias de datos fueran instantáneas, estos serían los únicos algoritmos que necesitariamos ejecutar para correr flujos de trabajo. Sin embargo, como las acciones anteriores no se ejecutan instantáneamente, hay que tomar en cuenta estos costos a la hora de planificar. Para ello, es necesario unir las planificaciones \'optimas generadas con los pseudoc\'odigos \ref{alg_blind_take_exhaustive} y \ref{alg_blind_check_mappings}. El pseudoc\'odigo \ref{alg_blind_merge} muestra el procedimiento para unir las planificaciones de cada uno de los segmentos en la planificacion final, la cual es utilizada por el algoritmo de ejecuci\'on para administrar las m\'aquinas virtuales que ejecutan el flujo de trabajo.
+Ahora bien, si el tiempo requerido para invocar máquinas virtuales fuera cero y las transferencias de datos fueran instantáneas, estos serían los únicos algoritmos que necesitaríamos ejecutar para correr flujos de trabajo. Sin embargo, como las acciones anteriores no se ejecutan instantáneamente, hay que tomar en cuenta estos costos a la hora de planificar. Para ello, es necesario unir las planificaciones \'optimas generadas con los pseudoc\'odigos \ref{alg_blind_take_exhaustive} y \ref{alg_blind_check_mappings}. El pseudoc\'odigo \ref{alg_blind_merge} muestra el procedimiento para unir las planificaciones de cada uno de los segmentos en la planificación final, la cual es utilizada por el algoritmo de ejecuci\'on para administrar las m\'aquinas virtuales que ejecutan el flujo de trabajo.
 
 
 \begin{algorithm}
@@ -396,7 +396,7 @@ Una vez que se tienen las asignaciones de tareas y recursos, se ejecuta el flujo
 
 \subsection{Descarga de resultados}
 
-Finalmente, si en las tareas hay una entrada que indique descargar los resultados, se transfieren los archivos especificados a la máquina principal que administra la ejecuci\'on del flujo de trabajo. Estos archivos son transferidos a trav\'es del protocolo SCP \cite{rfc4251}, el mismo protocolo que se ocupa en los comandos \texttt{scp} (Secure Copy) y \texttt{ssh} (Secure Shell). La descarga de estos archivos ocurre justo despu\'es de que la tarea es completada sin errores. Los archivos son descargados de forma s\'incrona, lo cual implica que el programa adminisrador espera a descargar los archivos de cada tarea.
+Finalmente, si en las tareas hay una entrada que indique descargar los resultados, se transfieren los archivos especificados a la máquina principal que administra la ejecuci\'on del flujo de trabajo. Estos archivos son transferidos a trav\'es del protocolo SCP \cite{rfc4251}, el mismo protocolo que se ocupa en los comandos \texttt{scp} (Secure Copy) y \texttt{ssh} (Secure Shell). La descarga de estos archivos ocurre justo despu\'es de que la tarea es completada sin errores. Los archivos son descargados de forma s\'incrona, lo cual implica que el programa administrador espera a descargar los archivos de cada tarea.
 
 
 Una vez descrito los tres algoritmos de la secci\'on anterior, podemos juntarlos en un solo procedimiento para generar planificaciones de flujos de trabajo sobre recursos din\'amicos de c\'omputo en la nube. El pseudoc\'odigo \ref{alg_schedule_main} muestra la unión de estos algoritmos para generar planificaciones.

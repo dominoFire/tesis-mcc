@@ -26,7 +26,7 @@ workflow:
     depends: [create_filelist, create_sysinfo]
 \end{lstlisting}
 
-En el listado de código \ref{code:workflow_example} se muestra la descripcion de un flujo de trabajo que imprime los nombres de los archivos contenidos en las máquinas virtuales que ejecutan este flujo. También, este flujo trabajo contiene una tarea para recolectar la información de la versión del sistema operativo que ejecuta la máquina virtual. Por otro lado, en la figura \ref{fig:workflow_test} se encuentra la representación visual de este flujo de trabajo. 
+En el listado de código \ref{code:workflow_example} se muestra la descripción de un flujo de trabajo que imprime los nombres de los archivos contenidos en las máquinas virtuales que ejecutan este flujo. También, este flujo trabajo contiene una tarea para recolectar la información de la versión del sistema operativo que ejecuta la máquina virtual. Por otro lado, en la figura \ref{fig:workflow_test} se encuentra la representación visual de este flujo de trabajo. 
 
 \begin{figure}
 \begin{center}
@@ -45,7 +45,7 @@ En el ejemplo anterior se pueden apreciar los elementos básicos que componen un
 \item{\texttt{command}: Comando en sintaxis de Bash que será ejecutado en esta tarea.}
 \item{\texttt{depends}: Lista de los nombres de las tareas que necesitan ser ejecutadas antes de que esta tarea pueda ejecutarse.}
 \item{\texttt{download\_files}: Lista de los archivos que deben ser descargados después de terminar la ejecución de la tarea.}
-\item{\texttt{include\_files}: Lista de los archivos que deben ser subidos al cluster antes de que la tarea sea ejecutada.}
+\item{\texttt{include\_files}: Lista de los archivos que deben ser cargados a la nube antes de que la tarea sea ejecutada.}
 \end{itemize}
 
 Una característica importante de Sweeper que lo hace único a otros sistemas de administración de flujos de trabajo, es la expansión de parámetros. El usuario puede especificar una tarea que se requiera ejecutar con un conjunto predefinido de argumentos. Sweeper calcula todas las combinaciones posibles de parámetros y automáticamente crea una tarea a ejecutarse por cada posible combinaci\'on de parámetros. Esto es de gran utilidad para la ejecución de experimentos y para la ejecución de aplicaciones de barrido de parámetros. Así, en el listado del código \ref{code:forests_2} se muestra un flujo de trabajo que utiliza listas de parámetros de donde se generan las combinaciones de argumentos. En la figura \ref{fig:workflow_forests} se encuentra la representación gr\'afica de este flujo de trabajo.
@@ -170,4 +170,4 @@ En este prototipo se utiliza el comando \texttt{aprof}, cuyo código fuente se e
 
 \subsection{Perfilador de recursos}
 
-También, para estimar la velocidad de las máquinas virtuales de un proveedor, sweeper se auxilia del PerfKitBenchmarker \cite{google2017perfkitbenchmarker}, un software diseñado para correr benchmarks, los cuales son pruebas de estrés que ejecutan las máquinas virtuales, cuyos resultados son analizados posteriormente. Para el caso de Sweeper, se utilzan las mediciones de operaciones de punto flotante por segundo (FLOPS por sus siglas en inglés) que provee el benchmark SPECfp \cite{spec2016specfp}.
+También, para estimar la velocidad de las máquinas virtuales de un proveedor, sweeper se auxilia del PerfKitBenchmarker \cite{google2017perfkitbenchmarker}, un software diseñado para correr benchmarks, los cuales son pruebas de estrés que ejecutan las máquinas virtuales, cuyos resultados son analizados posteriormente. Para el caso de Sweeper, se utilizan las mediciones de operaciones de punto flotante por segundo (FLOPS por sus siglas en inglés) que provee el benchmark SPECfp \cite{spec2016specfp}.

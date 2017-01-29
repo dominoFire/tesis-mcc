@@ -4,19 +4,19 @@
 
 En este capítulo presentamos una comparación entre algoritmos voraces de planificación y el algoritmo de planificación propuesto en esta tesis (vea capítulo \ref{chap:algorithm}), al cual llamaremos el algoritmo ciego. Se denominó algoritmo ciego debido a que, en comparación con el algoritmo Miope \cite{ramamritham1990efficient}, está cegado explícitamente a través de la división del flujo de trabajo en segmentos independientes, generando planificaciones de cada uno de los segmentos que son independientes entre sí.
 
-Para evaluar el algoritmo ciego, se generaron aleatoriamente flujos de trabajo utilizando un simulador de flujos de trabajo. El objetivo de estas simulaciones es comparar cuán óptimas son las planificaciones que genera el algoritmo de planificación propuesto en este trabajo respecto a los algoritmos MaxMin, MinMin y Miope. Cabe aclarar que para estas pruebas, el número y el tipo de recursos es determinado por el algoritmo ciego. Luego, utilizando estos recursos sugeridos por el algoritmo ciego, se generan otras planificaciones con los algoritmos MaxMin, MinMin y Miope. También, es importante notar que estos tres \'ultimos algoritmos fueron programados para encontrar la planificación con el menor tiempo total de ejecución (makespan). La implementaci\'on del algoritmo ciego se encuentra disponible en \cite{dominofire2014workflowsimulator}.
+Para evaluar el algoritmo ciego, se generaron aleatoriamente flujos de trabajo utilizando un simulador de flujos de trabajo. El objetivo de estas simulaciones es comparar cuán óptimas son las planificaciones que genera el algoritmo de planificación propuesto en este trabajo respecto a los algoritmos MaxMin, MinMin y Miope. Cabe aclarar que, para estas pruebas, el número y el tipo de recursos es determinado por el algoritmo ciego. Luego, utilizando estos recursos sugeridos por el algoritmo ciego, se generan otras planificaciones con los algoritmos MaxMin, MinMin y Miope. También, es importante notar que estos tres \'ultimos algoritmos fueron programados para encontrar la planificación con el menor tiempo total de ejecución (makespan). La implementaci\'on del algoritmo ciego se encuentra disponible en \cite{dominofire2014workflowsimulator}.
 
-Debido a que el algoritmo ciego es configurable, se prob\'o el algoritmo ciego sobre un conjunto de flujos de trabajo de prueba utlizando dos funciones de costo parcial diferentes. La primera funci\'on evalua el algoritmo ciego con respecto al costo de ejecución. La segunda funci\'on se utiliz\'o para evaluar el algoritmo ciego con respecto al tiempo de ejecuci\'on.
+Debido a que el algoritmo ciego es configurable, se prob\'o el algoritmo ciego sobre un conjunto de flujos de trabajo de prueba utilizando dos funciones de costo parcial diferentes. La primera funci\'on evalúa el algoritmo ciego con respecto al costo de ejecución. La segunda funci\'on se utiliz\'o para evaluar el algoritmo ciego con respecto al tiempo de ejecuci\'on.
 
 Se generaron 1000 flujos de trabajo con un número variable de tareas, que van desde 1 hasta 50 tareas. Los factores de complejidad de las tareas varían entre 50 y 100. Cada flujo de trabajo fue generado con base en un generador de números aleatorios congruencial, utilizando una semilla diferente para cada flujo de trabajo.
 
-Las configuraciones de recursos utlizadas se encuentran en la tabla \ref{table:resource_configurations}.
+Las configuraciones de recursos utilizadas se encuentran en la tabla \ref{table:resource_configurations}.
 
 \begin{table}[ht]
 \centering
 \begin{tabular}{lrrrr}
   \hline
-Configuraci\'on & Cores & $fv$ & Costo/Hr \\ 
+Configuraci\'on & Cores & $fv$ & Costo/Hr. \\ 
   \hline
   Small & 1 & 100 & 2.3 \\ 
   Medium & 2 & 200 & 4.0 \\ 
@@ -24,7 +24,7 @@ Configuraci\'on & Cores & $fv$ & Costo/Hr \\
   ExtraLarge & 8 & 800 & 10.0 \\ 
    \hline
 \end{tabular}
-\caption{Configuraciones de los recuros utilizados para las pruebas} 
+\caption{Configuraciones de los recursos utilizados para las pruebas} 
 \label{table:resource_configurations}
 \end{table}
 
@@ -42,7 +42,7 @@ En las tablas \ref{table:results_makespan} y \ref{table:results_cost}, se pueden
 Algoritmo & Makespan & Varianza & Costo & Varianza \\ 
   \hline
   Ciego & 6.54 & 3.42 & 83.21 & 61.43 \\ 
-  Maxmin & 3.08 & 1.99 & 51.21 & 30.35 \\ 
+  MaxMin & 3.08 & 1.99 & 51.21 & 30.35 \\ 
   MinMin & 3.11 & 2.01 & 50.86 & 30.77 \\ 
   Miope & 4.20 & 2.23 & 127.79 & 103.25 \\ 
   \hline

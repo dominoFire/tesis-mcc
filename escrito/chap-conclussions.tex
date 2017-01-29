@@ -16,14 +16,14 @@ Existen múltiples áreas de oportunidad para mejorar este algoritmo, entre ella
 
 \begin{enumerate}
 \item{Una demostraci\'on formal de que el algoritmo ciego calcula el numero \'optimo de m\'aquinas necesarias para alcanzar el paralelismo no bloqueante.}
-\item{Nuevas funciones de costo parcial para evaluar el comportamiento del algoritmo utlizando otras fuentes de optimizaci\'on.}
+\item{Nuevas funciones de costo parcial para evaluar el comportamiento del algoritmo utilizando otras fuentes de optimizaci\'on.}
 \end{enumerate}
 
 Por otro lado, el prototipo tiene posibles l\'ineas de trabajo futuro, las cuales se mencionan a continuaci\'on:
 
 \begin{enumerate}
-\item{Pooling de m\'aquinas virtuales, debido a que es muy costoso (en t\'erminos de tiempo) prender y apagar m\'aquinas virutales.}
+\item{Pooling de m\'aquinas virtuales, debido a que es muy costoso (en t\'erminos de tiempo) prender y apagar m\'aquinas virtuales.}
 \item{Entrega progresiva de resultados. El prototipo actual descarga los resultados de la ejecuci\'on una vez que termin\'o el flujo de trabajo; ser\'ia mejor que entregue resultados conforme se vayan obteniendo.}
 \item{Perfiladores de recursos y de tareas integrados a sweeper. Los algoritmos de planificación de flujos de trabajo generan mejores asignaciones si conocen con certeza el tiempo de ejecución de las tareas en los recursos disponibles. Si el sistema administrador de flujos de trabajo puede obtener esta información a través del análisis del uso de recursos, entonces podrá hacer mejores asignaciones.}
-\item{Utilizar contenedores. Recientemente, la virtualizaci\'on a nivel sistema operativo se ha vuelto popular para desplegar servicios en la nube. Su principal caracter\'istica es que pueden crearse m\'as r\'apido que una m\'aquina virtual y que pueden funcionar con un kernel compartido.}
+\item{Utilizar contenedores. Recientemente, la virtualizaci\'on a nivel sistema operativo se ha vuelto popular para desplegar servicios en la nube. Su principal caracter\'istica es que pueden crearse m\'as r\'apido que una m\'aquina virtual y que pueden funcionar con un \emph{kernel} compartido.}
 \end{enumerate}
